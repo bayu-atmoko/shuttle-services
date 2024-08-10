@@ -17,3 +17,4 @@ export 'src/locator.dart';
 export 'src/shared/global/global_cubit.dart';
 export 'src/themes/morpheme_colors/morpheme_colors.dart';
 export 'src/themes/morpheme_themes/morpheme_themes.dart';
+export 'src/shared/extras/extras.dart';

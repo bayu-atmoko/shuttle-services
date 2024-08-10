@@ -11,6 +11,7 @@ import 'package:profile/locator.dart';
 import 'package:selling/locator.dart';
 
 import 'routes/routes.dart';
+import 'package:route/locator.dart';
 
 void setupLocator() {
   locator.registerLazySingleton(() => Routes.router);
@@ -21,4 +22,5 @@ void setupLocator() {
   setupLocatorFeatureNews();
   setupLocatorFeatureProfile();
   setupLocatorFeatureSelling();
+  setupLocatorFeatureRoute();
 }

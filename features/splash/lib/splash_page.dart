@@ -29,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
   void setupTimer() {
     Timer(
       const Duration(seconds: 1),
-      (() => context.goToOnboading()),
+      (() => context.goToMapsPlacePicker()),
     );
   }
 

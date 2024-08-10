@@ -11,7 +11,5 @@ abstract final class Environment {
       String.fromEnvironment('ANDROID_APPLICATION_ID');
   static const String iosApplicationId =
       String.fromEnvironment('IOS_APPLICATION_ID');
-
-  static const bool isIntegrationTest =
-      bool.fromEnvironment('INTEGRATION_TEST');
+  static const String mapsApiKey = String.fromEnvironment('MAPS_API_KEY');
 }

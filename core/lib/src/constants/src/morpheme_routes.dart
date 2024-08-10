@@ -4,6 +4,8 @@ import 'package:dependency_manager/dependency_manager.dart'
     show GoRouter, GoRouterHelper;
 import 'package:flutter/material.dart' show BuildContext;
 
+import '../../shared/extras/extras.dart';
+
 String joinRoutes(List<String> paths) {
   if (paths.isEmpty) {
     return '/';
@@ -26,7 +28,6 @@ String dynamicRoutes(String nextRoutes) {
 
 abstract final class MorphemeRoutes {
   static const String splash = '/';
-  static const String onboarding = 'onboarding';
   static const String login = 'login';
   static const String register = 'register';
   static const String forgotPassword = 'forgot-password';
@@ -37,11 +38,13 @@ abstract final class MorphemeRoutes {
   static const String profile = 'profile';
 
   static const String selling = 'selling';
+
+  static const String onboarding = 'onboarding';
+  static const String mapsPlacePicker = 'maps-place-picker';
+  static const String map = 'map';
 }
 
 abstract final class PathRoutes {
-  static String get onboarding => joinRoutes([MorphemeRoutes.onboarding]);
-
   static String get login => joinRoutes([MorphemeRoutes.login]);
   static String get register => dynamicRoutes(MorphemeRoutes.register);
   static String get forgotPassword =>
@@ -52,10 +55,15 @@ abstract final class PathRoutes {
   static String get profile => joinRoutes([MorphemeRoutes.profile]);
 
   static String get selling => dynamicRoutes(MorphemeRoutes.selling);
+
+  static String get onboarding => joinRoutes([MorphemeRoutes.onboarding]);
+  static String get mapsPlacePicker =>
+      joinRoutes([MorphemeRoutes.mapsPlacePicker]);
+  static String get map =>
+      joinRoutes([PathRoutes.mapsPlacePicker, MorphemeRoutes.map]);
 }
 
 extension MorphemeRoutesContextExtension on BuildContext {
-  void goToOnboading() => go(PathRoutes.onboarding);
   void goToLogin() => go(PathRoutes.login);
   void goToRegister() => go(PathRoutes.register);
   void goToForgotPassword() => go(PathRoutes.forgotPassword);
@@ -68,4 +76,11 @@ extension MorphemeRoutesContextExtension on BuildContext {
     required Function(dynamic result) onReturn,
   }) =>
       goWithResult(PathRoutes.selling, onReturn: onReturn);
+
+  void goToOnboading() => go(PathRoutes.onboarding);
+  void goToMapsPlacePicker() => go(PathRoutes.mapsPlacePicker);
+  Future<ExtraPlacePicker?> goToMap(ExtraPlacePicker pageParams) => push(
+        PathRoutes.map,
+        extra: pageParams,
+      );
 }

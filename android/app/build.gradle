@@ -4,8 +4,8 @@ def patchVersion = 0
 def buildVersion = 1
 
 def minSdk = 21
-def targetSdk = 33
-def compileSdk = 33
+def targetSdk = 34
+def compileSdk = 34
 
 def code = majorVersion * 10000 + minorVersion * 1000 + patchVersion * 100 + buildVersion * 1
 def name = String.format('%d.%d.%d', majorVersion, minorVersion, patchVersion)
@@ -61,6 +61,7 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
     }
 
     kotlinOptions {
@@ -72,13 +73,14 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        namespace "shuttle.services.apps"
         applicationId dartEnvironmentVariables.ANDROID_APPLICATION_ID
         minSdkVersion minSdk
         targetSdkVersion targetSdk
         versionCode flutterVersionCode.toInteger() // change "flutterVersionCode.toInteger()" to "code" for native version 
         versionName flutterVersionName // change "flutterVersionName" to "name" for native version
         resValue "string", "app_name", dartEnvironmentVariables.APP_NAME
+        resValue "string", "google_maps_api_key", dartEnvironmentVariables.MAPS_API_KEY
         multiDexEnabled = true
     }
 
@@ -93,7 +95,30 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            // obfuscation proguard
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            // keystore signingConfig
+            signingConfig signingConfigs.debug
+
+            shrinkResources false
+            dexOptions {
+                preDexLibraries = false
+        }
+        }
+        debug {
+            // obfuscation proguard
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            // keystore signingConfig
+            signingConfig signingConfigs.debug
+
+            shrinkResources false
+            dexOptions {
+                preDexLibraries = false
+            }
         }
     }
 }
@@ -103,6 +128,8 @@ flutter {
 }
 
 dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.multidex:multidex:2.0.1"
 }

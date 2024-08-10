@@ -28,6 +28,8 @@ dependencies:
     path: ./features/profile
   selling:
     path: ./features/selling
+  route:
+    path: ./features/route
 
 dev_dependencies:
   integration_test:
@@ -41,3 +43,4 @@ flutter:
   uses-material-design: true
   assets:
     - integration_test/ndjson/
+
