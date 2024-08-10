@@ -8,6 +8,7 @@ import 'package:route/map/domain/entities/map_routes_entity.dart'
 import 'package:route/map/presentation/bloc/map_routes/map_routes_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:route/map/presentation/pages/map_page.dart';
 
 part 'map_state.dart';
 
@@ -27,8 +28,26 @@ class MapCubit extends MorphemeCubit<MapStateCubit> {
   final GlobalKey<State> _keyLoader = GlobalKey<State>();
 
   @override
-  void initState(BuildContext context) async {
-    _getInitialCurrentLocation();
+  void initState(BuildContext context) {
+    _getInitialCurrentLocation(context);
+  }
+
+  @override
+  void initArgument<Page>(BuildContext context, Page widget) async {
+    super.initArgument(context, widget);
+    if (widget is! MapPage) return;
+
+    final initialLocation = widget.pageParams?.locationLatLng;
+    if (initialLocation?.latitude != null &&
+        initialLocation?.longitude != null) {
+      final latLng = LatLng(
+        initialLocation!.latitude,
+        initialLocation.longitude,
+      );
+      emit(state.copyWith(
+        markerReportLatLng: [latLng],
+      ));
+    }
   }
 
   @override
@@ -49,11 +68,14 @@ class MapCubit extends MorphemeCubit<MapStateCubit> {
 
   void _listenerMapRoutes(BuildContext context, MapRoutesState state) {
     state.when(
+      onLoading: (_) =>
+          MorphemeCircularLoadingDialog.showLoadingDialog(context, _keyLoader),
       onFailed: (state) {
         Navigator.of(context, rootNavigator: true).pop();
         _showTechnicalErrorMessage(context);
       },
       onSuccess: (state) {
+        Navigator.of(context, rootNavigator: true).pop();
         List<routes_entity.LegsMapRoutes>? legs =
             (state.data.routes ?? []).isNotEmpty
                 ? state.data.routes!.first.legs
@@ -149,7 +171,7 @@ class MapCubit extends MorphemeCubit<MapStateCubit> {
   void _fetchMapRoutes(MapRoutesBody body) =>
       mapRoutesBloc.add(FetchMapRoutes(body));
 
-  void _getInitialCurrentLocation() async {
+  void _getInitialCurrentLocation(BuildContext context) async {
     Location location = _getLatLngCurrentLocation();
 
     GoogleMapController googleMapController = await controller.future;
@@ -165,6 +187,8 @@ class MapCubit extends MorphemeCubit<MapStateCubit> {
         }
       },
     );
+
+    _fetchMultipleRoute(context);
   }
 
   void _moveMapCamera(
@@ -276,12 +300,13 @@ class MapCubit extends MorphemeCubit<MapStateCubit> {
   void _fetchMultipleRoute(
     BuildContext context,
   ) {
+    final List<LatLng>? markerReportLatLng = state.markerReportLatLng;
 
-// TODO
-    _getRouteAndSaveMarker(
-      [LatLng(0.000000, 0.000000)],
-    );
-    Navigator.of(context, rootNavigator: true).pop();
+    if (markerReportLatLng != null) {
+      _getRouteAndSaveMarker(
+        markerReportLatLng,
+      );
+    }
   }
 
   // Function to calculate the distance between two points using the Haversine Formula
