@@ -30,7 +30,7 @@ class _MapsPlacePickerPageState extends State<MapsPlacePickerPage>
         .isLoading;
 
     return MorphemeScrollViewWithAppBar(
-      tittle: "Pilih lokasi penjemputan",
+      tittle: "   Pilih lokasi penjemputan",
       isScroll: false,
       child: Stack(
         children: [
