@@ -89,7 +89,7 @@ class MorphemeButton extends StatelessWidget {
                         : MorphemeTextScaleDown(text, style: textStyle),
                     icon: isLoading
                         ? MorphemeCircularLoading(
-                            size: 24, color: context.color.primary)
+                            size: 24, color: context.color.white)
                         : icon!,
                   ),
                 );
@@ -99,7 +99,7 @@ class MorphemeButton extends StatelessWidget {
                 style: style,
                 child: isLoading
                     ? MorphemeCircularLoading(
-                        size: 24, color: context.color.primary)
+                        size: 24, color: context.color.white)
                     : MorphemeTextScaleDown(text, style: textStyle),
               );
             case TypeButton.outlined:
@@ -116,7 +116,7 @@ class MorphemeButton extends StatelessWidget {
                         : MorphemeTextScaleDown(text, style: textStyle),
                     icon: isLoading
                         ? MorphemeCircularLoading(
-                            size: 24, color: context.color.primary)
+                            size: 24, color: context.color.black)
                         : icon!,
                   ),
                 );
@@ -126,7 +126,7 @@ class MorphemeButton extends StatelessWidget {
                 style: style,
                 child: isLoading
                     ? MorphemeCircularLoading(
-                        size: 24, color: context.color.primary)
+                        size: 24, color: context.color.black)
                     : MorphemeTextScaleDown(text, style: textStyle),
               );
             default:
@@ -143,7 +143,7 @@ class MorphemeButton extends StatelessWidget {
                         : MorphemeTextScaleDown(text, style: textStyle),
                     icon: isLoading
                         ? MorphemeCircularLoading(
-                            size: 24, color: context.color.primary)
+                            size: 24, color: context.color.black)
                         : icon!,
                   ),
                 );
@@ -153,7 +153,7 @@ class MorphemeButton extends StatelessWidget {
                 style: style,
                 child: isLoading
                     ? MorphemeCircularLoading(
-                        size: 24, color: context.color.primary)
+                        size: 24, color: context.color.black)
                     : MorphemeTextScaleDown(text, style: textStyle),
               );
           }

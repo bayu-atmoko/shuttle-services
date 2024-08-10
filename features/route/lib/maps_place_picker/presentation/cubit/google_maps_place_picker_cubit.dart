@@ -130,7 +130,7 @@ class MapsPlacePickerCubit extends MorphemeCubit<MapsPlacePickerStateCubit> {
   }
 
   void onSelectLocationPointPressed(BuildContext context) {
-    context.pop(ExtraPlacePicker(
+    context.goToMap(ExtraPlacePicker(
       locationLatLng: state.latLng,
       locationName: state.locationName,
     ));

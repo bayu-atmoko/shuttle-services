@@ -20,10 +20,13 @@ abstract base class MorphemeTheme {
   ThemeData get themeData => rawThemeData.copyWith(
         scaffoldBackgroundColor: color.white,
         appBarTheme: AppBarTheme(
-          elevation: 0,
-          color: color.white,
-          foregroundColor: color.black,
-          titleTextStyle: _getTextTheme.titleLarge,
+          titleSpacing: MorphemeSizes.s0,
+          elevation: MorphemeSizes.s0,
+          color: color.primary,
+          foregroundColor: color.white,
+          titleTextStyle: _getTextTheme.titleLarge?.copyWith(
+            color: color.white,
+          ),
         ),
         colorScheme: colorScheme,
         textTheme: _getTextTheme,
@@ -59,6 +62,7 @@ abstract base class MorphemeTheme {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             textStyle: _getTextTheme.labelLarge,
+            backgroundColor: color.grey4,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(MorphemeSizes.s8)),
             ),
@@ -72,6 +76,9 @@ abstract base class MorphemeTheme {
               borderRadius: BorderRadius.all(Radius.circular(MorphemeSizes.s8)),
             ),
             padding: const EdgeInsets.symmetric(horizontal: MorphemeSizes.s16),
+            side: BorderSide(
+              color: color.primary,
+            ),
           ),
         ),
         textButtonTheme: TextButtonThemeData(

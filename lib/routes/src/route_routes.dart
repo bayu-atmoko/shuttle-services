@@ -9,17 +9,17 @@ List<RouteBase> routePageRoutes = [
     builder: (context, state) {
       return const MapsPlacePickerPage(pageParams: null);
     },
-    // routes: [
-    //   GoRoute(
-    //     path: MorphemeRoutes.map,
-    //     parentNavigatorKey: rootNavigatorKey,
-    //     builder: (context, state) {
-    //       final pageParams = state.extra as ExtraPlacePicker;
-    //       return MapPage(
-    //         pageParams: pageParams,
-    //       );
-    //     },
-    //   ),
-    // ],
+    routes: [
+      GoRoute(
+        path: MorphemeRoutes.map,
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) {
+          final pageParams = state.extra as ExtraPlacePicker;
+          return MapPage(
+            pageParams: pageParams,
+          );
+        },
+      ),
+    ],
   ),
 ];
