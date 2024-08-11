@@ -1,24 +1,29 @@
+import 'package:core/src/constants/src/morpheme_sizes.dart';
+import 'package:core/src/themes/morpheme_colors/morpheme_colors.dart';
 import 'package:flutter/material.dart';
 
 class MorphemeCircularLoading extends StatelessWidget {
   const MorphemeCircularLoading({
     super.key,
     required this.size,
-    required this.color,
+    this.strokeWidth,
+    this.color,
   });
 
   final double size;
-  final Color color;
+  final double? strokeWidth;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: size,
-      height: size,
-      padding: const EdgeInsets.all(2.0),
-      child: CircularProgressIndicator(
-        color: color,
-        strokeWidth: 3,
+    return Center(
+      child: SizedBox(
+        width: size,
+        height: size,
+        child: CircularProgressIndicator(
+          color: color ?? context.color.primary,
+          strokeWidth: strokeWidth ?? MorphemeSizes.s3,
+        ),
       ),
     );
   }

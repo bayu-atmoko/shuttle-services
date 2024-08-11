@@ -1,6 +1,7 @@
 import 'package:core/src/component/atoms/morpheme_text.dart';
 import 'package:core/src/component/organisms/morpheme_scroll/src/morpheme_scroll_expanded.dart';
 import 'package:core/src/constants/src/morpheme_sizes.dart';
+import 'package:core/src/themes/morpheme_colors/morpheme_colors.dart';
 import 'package:flutter/material.dart';
 
 class MorphemeScrollViewWithAppBar extends StatelessWidget {
@@ -42,7 +43,7 @@ class MorphemeScrollViewWithAppBar extends StatelessWidget {
         actions: actionsAppBar,
       ),
       floatingActionButton: floatingActionButton,
-      backgroundColor: background ?? Colors.white,
+      backgroundColor: background ?? context.color.backgroundPage,
       bottomSheet: bottomSheet,
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       body: isExpanded

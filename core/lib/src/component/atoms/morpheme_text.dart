@@ -91,6 +91,16 @@ enum MorphemeTextTheme {
       leadingDistribution: TextLeadingDistribution.even,
     ),
   ),
+  labelExtraLarge(
+    TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.1,
+      height: 1.43,
+      textBaseline: TextBaseline.alphabetic,
+      leadingDistribution: TextLeadingDistribution.even,
+    ),
+  ),
   labelLarge(
     TextStyle(
       fontSize: 14.0,
@@ -266,6 +276,16 @@ class MorphemeText extends StatelessWidget {
     this.color,
     this.fontWeight,
   }) : textTheme = MorphemeTextTheme.titleSmall;
+  const MorphemeText.labelExtraLarge(
+    this.text, {
+    super.key,
+    this.style,
+    this.maxLines,
+    this.overflow,
+    this.textAlign,
+    this.color,
+    this.fontWeight,
+  }) : textTheme = MorphemeTextTheme.labelExtraLarge;
   const MorphemeText.labelLarge(
     this.text, {
     super.key,
