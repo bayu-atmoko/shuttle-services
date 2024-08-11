@@ -39,6 +39,7 @@ class ReportList extends StatelessWidget {
             address: data[index].locationAddress.orEmpty(),
             createdAt: data[index].createdAt,
             officer: data[index].officerName.orEmpty(),
+            creator: data[index].creatorName.orEmpty(),
             priority: data[index].priority,
           );
         },

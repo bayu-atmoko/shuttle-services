@@ -10,6 +10,5 @@ abstract class MorphemeImages {
   static const String logoLight = '$_assets/logo_light.png';
   static const String google = '$_assets/google.png';
   static const String facebook = '$_assets/facebook.png';
-  static const String logoUptPengelolaanSampah2 =
-      '$_assets/logo_upt_pengelolaan_sampah2.png';
+  static const String logoAppsLsp = '$_assets/logo_apps_lsp.png';
 }

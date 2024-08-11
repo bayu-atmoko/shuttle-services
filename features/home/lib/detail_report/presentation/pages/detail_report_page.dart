@@ -301,11 +301,18 @@ class _DetailReportPageState extends State<DetailReportPage>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               MorphemeText.titleSmall(
-                                context.s.typeOfComplaint,
+                                context.s.reportDate,
                                 fontWeight: FontWeight.bold,
                               ),
                               MorphemeText.bodySmall(
-                                report?.report?.complaintTitle ?? '-',
+                                report?.report?.createdAt == null
+                                    ? '-'
+                                    : DateTimeHelper.convertDateStringToString(
+                                        date: (report?.report?.createdAt ?? '')
+                                            .toString(),
+                                        formatOutput: dateDDMONTHYYYYHHMMText,
+                                        formatInput: dateYYYYMMDDHHMMSSStrip,
+                                      ),
                                 maxLines: 3,
                               ),
                               const MorphemeSpacing.vertical8(),
@@ -318,57 +325,6 @@ class _DetailReportPageState extends State<DetailReportPage>
                         ),
                       ],
                     ),
-                    MorphemeText.titleSmall(
-                      context.s.description,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    MorphemeText.bodySmall(
-                      report?.report?.description ?? '-',
-                      maxLines: 5,
-                    ),
-                    const MorphemeSpacing.vertical8(),
-                    if (isOfficer) ...[
-                      MorphemeText.titleSmall(
-                        context.s.priorityScale,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      MorphemeText.bodySmall(
-                        ReportPriorityEnumHelper.getEnumBasedOnValue(
-                              report?.report?.priority ?? 3,
-                            )?.title ??
-                            '-',
-                        maxLines: 1,
-                      ),
-                      const MorphemeSpacing.vertical8(),
-                    ],
-                    if ((report?.report?.cancellationReason ?? '')
-                        .isNotNullOrEmpty) ...[
-                      MorphemeText.titleSmall(
-                        context.s.cancelReason,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      MorphemeText.bodySmall(
-                        report?.report?.cancellationReason ?? '-',
-                        maxLines: 5,
-                      ),
-                      const MorphemeSpacing.vertical8(),
-                    ],
-                    MorphemeText.titleSmall(
-                      context.s.reportDate,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    MorphemeText.bodySmall(
-                      report?.report?.createdAt == null
-                          ? '-'
-                          : DateTimeHelper.convertDateStringToString(
-                              date:
-                                  (report?.report?.createdAt ?? '').toString(),
-                              formatOutput: dateDDMONTHYYYYHHMMText,
-                              formatInput: dateYYYYMMDDHHMMSSStrip,
-                            ),
-                      maxLines: 3,
-                    ),
-                    const MorphemeSpacing.vertical8(),
                     MorphemeText.titleSmall(
                       context.s.cleanedDate,
                       fontWeight: FontWeight.bold,
@@ -385,6 +341,27 @@ class _DetailReportPageState extends State<DetailReportPage>
                       maxLines: 3,
                     ),
                     const MorphemeSpacing.vertical8(),
+                    MorphemeText.titleSmall(
+                      context.s.description,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    MorphemeText.bodySmall(
+                      report?.report?.description ?? '-',
+                      maxLines: 5,
+                    ),
+                    const MorphemeSpacing.vertical8(),
+                    if ((report?.report?.cancellationReason ?? '')
+                        .isNotNullOrEmpty) ...[
+                      MorphemeText.titleSmall(
+                        context.s.cancelReason,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      MorphemeText.bodySmall(
+                        report?.report?.cancellationReason ?? '-',
+                        maxLines: 5,
+                      ),
+                      const MorphemeSpacing.vertical8(),
+                    ],
                     MorphemeText.titleSmall(
                       context.s.reporter,
                       fontWeight: FontWeight.bold,

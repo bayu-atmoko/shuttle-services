@@ -212,7 +212,8 @@ class CreateReportCubit extends MorphemeCubit<CreateReportStateCubit> {
     mapsKey.validate();
 
     emit(state.copyWith(
-      isTypeValid: state.type != null,
+      // isTypeValid: state.type != null,
+      isTypeValid: true,
       isDistrictValid: state.district != null,
       isVillageValid: state.village != null,
       isPhotoValid: (state.photoFile != null && state.photoFile!.isNotEmpty) ||

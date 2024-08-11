@@ -3,7 +3,7 @@ import 'package:core/core.dart';
 class CreateReportBody extends Equatable {
   const CreateReportBody({
     this.description,
-    this.complaintId,
+    this.complaintId = 8,
     this.district,
     this.village,
     this.address,
@@ -26,7 +26,8 @@ class CreateReportBody extends Equatable {
   Map<String, dynamic> toMap() {
     return {
       if (description != null) 'description': description,
-      if (complaintId != null) 'complaint_id': complaintId,
+      // if (complaintId != null) 'complaint_id': complaintId,
+      'complaint_id': 8,
       if (district != null) 'district': district,
       if (village != null) 'village': village,
       if (address != null) 'address': address,

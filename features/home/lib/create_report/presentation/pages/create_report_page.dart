@@ -38,9 +38,6 @@ class _CreateReportPageState extends State<CreateReportPage>
     final mapsKey =
         context.select((CreateReportCubit element) => element.mapsKey);
 
-    final isTypeValid = context
-        .select((CreateReportCubit element) => element.state)
-        .isTypeValid;
     final isDistrictValid = context
         .select((CreateReportCubit element) => element.state)
         .isDistrictValid;
@@ -51,8 +48,6 @@ class _CreateReportPageState extends State<CreateReportPage>
         .select((CreateReportCubit element) => element.state)
         .isPhotoValid;
 
-    final type =
-        context.select((CreateReportCubit element) => element.state).type;
     final district =
         context.select((CreateReportCubit element) => element.state).district;
     final village =
@@ -64,9 +59,6 @@ class _CreateReportPageState extends State<CreateReportPage>
     final villageDropdownList = context
         .select((CreateReportCubit element) => element.state)
         .villageDropdownList;
-    final complaintList = context
-        .select((CreateReportCubit element) => element.state)
-        .complaintList;
 
     final photoFile =
         context.select((CreateReportCubit element) => element.state).photoFile;
@@ -103,34 +95,6 @@ class _CreateReportPageState extends State<CreateReportPage>
                   validator: ValidatorValueHelper.validatorEmpty,
                   textInputAction: TextInputAction.next,
                   maxLines: 4,
-                ),
-                const MorphemeSpacing.vertical16(),
-                MorphemeDropdown<String>(
-                  title: context.s.typeOfComplaint,
-                  hintText: context.s.selectTypeOfComplaint,
-                  isValid: isTypeValid,
-                  value: type?.title != null && type!.title.isNotNullOrEmpty
-                      ? type.title
-                      : null,
-                  items: complaintList
-                      ?.map((e) => e.title)
-                      .skipWhile((value) => value.isNullOrEmpty)
-                      .map((e) => DropdownMenuItem<String>(
-                            value: e,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                left: MorphemeSizes.s16,
-                              ),
-                              child: MorphemeText.titleMedium(
-                                e.orEmpty(),
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ))
-                      .toList(),
-                  onChanged: (value) => context
-                      .read<CreateReportCubit>()
-                      .onTypeChanged(value.orEmpty()),
                 ),
                 const MorphemeSpacing.vertical16(),
                 MorphemeDropdown<String>(

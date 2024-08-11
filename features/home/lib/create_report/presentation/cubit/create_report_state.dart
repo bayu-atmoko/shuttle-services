@@ -31,7 +31,7 @@ class CreateReportStateCubit extends Equatable {
     this.type,
     this.district,
     this.village,
-    this.isTypeValid,
+    this.isTypeValid = true,
     this.isDistrictValid,
     this.isVillageValid,
     this.isPhotoValid,

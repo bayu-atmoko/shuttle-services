@@ -12,7 +12,7 @@ enum ReportStatusEnum {
       case ReportStatusEnum.assigned:
         return 'Ditugaskan';
       case ReportStatusEnum.cleaned:
-        return 'Dibersihkan';
+        return 'Diantar';
       case ReportStatusEnum.finish:
         return 'Selesai';
       case ReportStatusEnum.cancel:

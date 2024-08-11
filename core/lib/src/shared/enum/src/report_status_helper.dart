@@ -25,7 +25,7 @@ class ReportStatusHelper {
         title: ReportStatusEnum.cleaned.title,
         color: context.color.primary700,
         background: context.color.primary100,
-        icon: Icons.cleaning_services_outlined,
+        icon: Icons.motorcycle,
       );
     } else if (status.toLowerCase() ==
         ReportStatusEnum.finish.value.toLowerCase()) {

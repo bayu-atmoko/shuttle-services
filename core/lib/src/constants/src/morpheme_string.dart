@@ -1,10 +1,10 @@
 abstract final class MorphemeString {
   /// contact
-  static const String phoneUpt = "0227207889 / 0227104601";
-  static const String emailUpt = "upt.pengelolaansampahdlhk@gmail.com";
-  static const String whatsappUpt = "081222156756";
-  static const String instagramUpt = "upt_pengelolaansampah.dlhbdg";
-  static const String twitterUpt = "uptps_dlhbdg";
+  static const String phoneUpt = "081234567890";
+  static const String emailUpt = "antarjemput@gmail.com";
+  static const String whatsappUpt = "081234567890";
+  static const String instagramUpt = "antarjemput_ig";
+  static const String twitterUpt = "antarjemput_twitter";
 
   /// upload file category
   static const String userUploadFile = "user";

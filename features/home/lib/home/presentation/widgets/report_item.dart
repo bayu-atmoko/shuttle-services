@@ -11,6 +11,7 @@ class ReportItem extends StatelessWidget {
     required this.address,
     required this.createdAt,
     this.officer,
+    this.creator,
     this.priority,
   });
 
@@ -20,6 +21,7 @@ class ReportItem extends StatelessWidget {
   final String address;
   final DateTime? createdAt;
   final String? officer;
+  final String? creator;
   final int? priority;
 
   @override
@@ -65,14 +67,8 @@ class ReportItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Expanded(
-                    child: MorphemeText.titleSmall(
-                      type,
-                      fontWeight: FontWeight.bold,
-                      maxLines: 1,
-                    ),
-                  ),
                   MorphemeText.bodySmall(
                     createdAt != null
                         ? DateTimeHelper.convertDateTimeToString(
@@ -113,22 +109,17 @@ class ReportItem extends StatelessWidget {
   Row _officerInformation(BuildContext context, bool isUserOfficer) {
     return Row(
       children: [
-        Icon(
-          isUserOfficer ? Icons.report_outlined : Icons.account_box,
+        const Icon(
+          Icons.account_box,
           size: MorphemeSizes.s24,
         ),
         const MorphemeSpacing.horizontal4(),
         MorphemeText.bodySmall(
-          isUserOfficer
-              ? ReportPriorityEnumHelper.getEnumBasedOnValue(
-                    priority ?? 3,
-                  )?.title ??
-                  ''
-              : "${context.s.officer} : ",
+          isUserOfficer ? "Nama Pemesan : " : "${context.s.officer} : ",
           fontWeight: FontWeight.bold,
         ),
         MorphemeText.bodySmall(
-          isUserOfficer ? '' : officer!.orEmpty(),
+          isUserOfficer ? creator!.orEmpty() : officer!.orEmpty(),
           maxLines: 1,
         ),
       ],

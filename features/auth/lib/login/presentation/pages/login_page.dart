@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage>
           children: [
             MorphemeSpacing.vertical72(),
             MorphemeImageAsset(
-              MorphemeImages.logoUptPengelolaanSampah2,
+              MorphemeImages.logoAppsLsp,
               height: MorphemeSizes.s80,
             ),
             MorphemeSpacing.vertical32(),
