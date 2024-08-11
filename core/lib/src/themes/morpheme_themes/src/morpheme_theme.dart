@@ -22,7 +22,7 @@ abstract base class MorphemeTheme {
         appBarTheme: AppBarTheme(
           titleSpacing: MorphemeSizes.s0,
           elevation: MorphemeSizes.s0,
-          color: color.primary,
+          color: color.primaryDark,
           foregroundColor: color.white,
           titleTextStyle: _getTextTheme.titleLarge?.copyWith(
             color: color.white,
@@ -62,7 +62,7 @@ abstract base class MorphemeTheme {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             textStyle: _getTextTheme.labelLarge,
-            backgroundColor: color.grey4,
+            backgroundColor: color.primary,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(MorphemeSizes.s8)),
             ),
