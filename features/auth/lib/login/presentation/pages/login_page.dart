@@ -1,7 +1,6 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-import '../../../shared/widget/widget.dart';
 import '../cubit/login_cubit.dart';
 import '../widgets/widgets.dart';
 
@@ -19,25 +18,22 @@ class _LoginPageState extends State<LoginPage>
 
   @override
   Widget buildWidget(BuildContext context) {
-    return Scaffold(
-      key: const ValueKey(MorphemeDataTesId.pageLogin),
-      appBar: AppBar(title: Text(context.s.login)),
+    return const Scaffold(
+      key: ValueKey(MorphemeDataTesId.pageLogin),
       body: SingleChildScrollView(
-        key: const ValueKey(MorphemeDataTesId.scrollLogin),
-        padding: const EdgeInsets.all(16),
+        key: ValueKey(MorphemeDataTesId.scrollLogin),
+        padding: EdgeInsets.symmetric(vertical: MorphemeSizes.marginPage),
         child: Column(
           children: [
-            ThirdLoginButton(
-              onFacebookPressed: cubit.onLoginWithFacebookPressed,
-              onGooglePressed: cubit.onLoginWithGooglePressed,
-              onApplePressed: cubit.onLoginWithApplePressed,
+            MorphemeSpacing.vertical72(),
+            MorphemeImageAsset(
+              MorphemeImages.logoUptPengelolaanSampah2,
+              height: MorphemeSizes.s80,
             ),
-            const MorphemeSpacing.vertical36(),
-            const DividerOr(),
-            const MorphemeSpacing.vertical36(),
-            const LoginWithEmail(),
-            const MorphemeSpacing.vertical32(),
-            const NewRegister(),
+            MorphemeSpacing.vertical32(),
+            LoginWithEmail(),
+            MorphemeSpacing.vertical32(),
+            NewRegister(),
           ],
         ),
       ),

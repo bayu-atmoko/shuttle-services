@@ -15,12 +15,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     required this.useCase,
   }) : super(LoginInitial()) {
     on<FetchLogin>((event, emit) async {
-      emit(LoginLoading(event.body, event.extra));
-      final result = await useCase(event.body);
+      emit(LoginLoading(event.body, event.headers, event.extra));
+      final result = await useCase(event.body, headers: event.headers);
       emit(
         result.fold(
-          (failure) => LoginFailed(event.body, failure, event.extra),
-          (success) => LoginSuccess(event.body, success, event.extra),
+          (failure) =>
+              LoginFailed(event.body, event.headers, failure, event.extra),
+          (success) =>
+              LoginSuccess(event.body, event.headers, success, event.extra),
         ),
       );
     });
