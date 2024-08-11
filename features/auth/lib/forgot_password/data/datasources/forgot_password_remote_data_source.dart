@@ -16,7 +16,7 @@ class ForgotPasswordRemoteDataSourceImpl
   @override
   Future<ForgotPasswordResponse> forgotPassword(ForgotPasswordBody body) async {
     final response = await http.get(
-      MorphemeEndpoints.forgotPassword,
+      MorphemeEndpoints.login,
       body: body.toMap(),
       cacheStrategy: JustCacheStrategy(
         ttlValue: const Duration(minutes: 120),
