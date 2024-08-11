@@ -20,7 +20,7 @@ class MapsPlacePickerCubit extends MorphemeCubit<MapsPlacePickerStateCubit> {
     required this.placeAutocompleteBloc,
     required this.geocodingBloc,
   }) : super(const MapsPlacePickerStateCubit(
-          initialLatLng: LatLng(-6.17271561511165, 106.8316083803981),
+          initialLatLng: LatLng(-6.9084616, 107.614289),
           autocompleteSearch: [],
           locationName: '',
         ));
@@ -267,42 +267,8 @@ class MapsPlacePickerCubit extends MorphemeCubit<MapsPlacePickerStateCubit> {
   }
 
   bool onMapTap(BuildContext context, LatLng value) {
-    if (state.currentLocation?.latitude != null &&
-        state.currentLocation?.longitude != null) {
-      LatLng currentLocation = LatLng(
-        state.currentLocation!.latitude!,
-        state.currentLocation!.longitude!,
-      );
-
-      // Radius in meters
-      double radius = 20.0;
-
-      bool withinRadius = isWithinRadius(currentLocation, value, radius);
-      if (withinRadius) {
-        _onLatLngChanged(value);
-        return true;
-      } else {
-        context.showSnackBar(
-          MorphemeSnackBar.error(
-            key: const ValueKey('snackbarError'),
-            context: context,
-            message: context.s.selectedLocationOutOfYourLocationRadius,
-          ),
-        );
-        return false;
-      }
-
-      ///
-    } else {
-      context.showSnackBar(
-        MorphemeSnackBar.error(
-          key: const ValueKey('snackbarError'),
-          context: context,
-          message: context.s.enableYourDeviceLocation,
-        ),
-      );
-      return false;
-    }
+    _onLatLngChanged(value);
+    return true;
   }
 
   void getCurrentLocation() {
