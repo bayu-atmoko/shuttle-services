@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: "none"
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -16,20 +16,18 @@ dependencies:
     path: ./core
   splash:
     path: ./features/splash
-  onboarding:
-    path: ./features/onboarding
   auth:
     path: ./features/auth
   home:
     path: ./features/home
-  news:
-    path: ./features/news
   profile:
     path: ./features/profile
-  selling:
-    path: ./features/selling
   route:
     path: ./features/route
+  help:
+    path: ./features/help
+  main:
+    path: ./features/main
 
 dev_dependencies:
   integration_test:
@@ -43,4 +41,5 @@ flutter:
   uses-material-design: true
   assets:
     - integration_test/ndjson/
+
 
