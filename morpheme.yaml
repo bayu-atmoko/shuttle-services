@@ -31,11 +31,11 @@ firebase:
 #  output_android_dir: android/app
 # #  output_ios_dir: ios
 #  dev:
-#    project_id: "resik-app"
+#    project_id: "shuttle-service-423a8"
 #  stag:
-#    project_id: "resik-app"
+#    project_id: "shuttle-service-423a8"
 #  prod:
-#    project_id: "resik-app"
+#    project_id: "shuttle-service-423a8"
 
 localization:
   arb_dir: assets/assets/l10n
