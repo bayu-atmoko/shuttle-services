@@ -13,6 +13,11 @@ void setupLocatorMap() {
   // *Cubit
   locator.registerFactory(() => MapCubit(
         mapRoutesBloc: locator(),
+        assignedReportBloc: locator(),
+        cleanedReportBloc: locator(),
+        distanceMatrixBloc: locator(),
+        routeOptimizationBloc: locator(),
+        createRouteBloc: locator(),
       ));
 
   // *Bloc
