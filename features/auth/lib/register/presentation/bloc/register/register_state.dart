@@ -50,33 +50,36 @@ class RegisterInitial extends RegisterState {
 }
 
 class RegisterLoading extends RegisterState {
-  RegisterLoading(this.body, this.extra);
+  RegisterLoading(this.body, this.headers, this.extra);
 
   final RegisterBody body;
+  final Map<String, String>? headers;
   final dynamic extra;
 
   @override
-  List<Object?> get props => [body, extra];
+  List<Object?> get props => [body, headers, extra];
 }
 
 class RegisterSuccess extends RegisterState {
-  RegisterSuccess(this.body, this.data, this.extra);
+  RegisterSuccess(this.body, this.headers, this.data, this.extra);
 
   final RegisterBody body;
+  final Map<String, String>? headers;
   final RegisterEntity data;
   final dynamic extra;
 
   @override
-  List<Object?> get props => [body, data, extra];
+  List<Object?> get props => [body, headers, data, extra];
 }
 
 class RegisterFailed extends RegisterState {
-  RegisterFailed(this.body, this.failure, this.extra);
+  RegisterFailed(this.body, this.headers, this.failure, this.extra);
 
   final RegisterBody body;
+  final Map<String, String>? headers;
   final MorphemeFailure failure;
   final dynamic extra;
 
   @override
-  List<Object?> get props => [body, failure, extra];
+  List<Object?> get props => [body, headers, failure, extra];
 }
