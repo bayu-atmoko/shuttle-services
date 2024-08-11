@@ -16,14 +16,14 @@ class SelectButtonSection extends StatelessWidget {
       bottom: MorphemeSizes.s16,
       child: MorphemeButton.elevated(
         key: const ValueKey("selectLocationButton"),
-        text: "Pilih lokasi",
+        text: context.s.selectLocationPoint,
         onPressed: () {
           if (latLng == null) {
             context.showSnackBar(
               MorphemeSnackBar.error(
                 key: const ValueKey('snackbarError'),
                 context: context,
-                message: "Kamu belum memilih lokasi di maps",
+                message: context.s.youDidNotSelectLocation,
               ),
             );
           } else {

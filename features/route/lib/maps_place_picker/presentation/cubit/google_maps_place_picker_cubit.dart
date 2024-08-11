@@ -44,7 +44,7 @@ class MapsPlacePickerCubit extends MorphemeCubit<MapsPlacePickerStateCubit> {
     super.initArgument(context, widget);
     if (widget is! MapsPlacePickerPage) return;
 
-    final initialLocation = null;
+    final initialLocation = widget.pageParams.locationLatLng;
     if (initialLocation?.latitude != null &&
         initialLocation?.longitude != null) {
       final latLng = LatLng(
@@ -130,7 +130,7 @@ class MapsPlacePickerCubit extends MorphemeCubit<MapsPlacePickerStateCubit> {
   }
 
   void onSelectLocationPointPressed(BuildContext context) {
-    context.goToMap(ExtraPlacePicker(
+    context.pop(ExtraPlacePicker(
       locationLatLng: state.latLng,
       locationName: state.locationName,
     ));
@@ -267,8 +267,42 @@ class MapsPlacePickerCubit extends MorphemeCubit<MapsPlacePickerStateCubit> {
   }
 
   bool onMapTap(BuildContext context, LatLng value) {
-    _onLatLngChanged(value);
-    return true;
+    if (state.currentLocation?.latitude != null &&
+        state.currentLocation?.longitude != null) {
+      LatLng currentLocation = LatLng(
+        state.currentLocation!.latitude!,
+        state.currentLocation!.longitude!,
+      );
+
+      // Radius in meters
+      double radius = 20.0;
+
+      bool withinRadius = isWithinRadius(currentLocation, value, radius);
+      if (withinRadius) {
+        _onLatLngChanged(value);
+        return true;
+      } else {
+        context.showSnackBar(
+          MorphemeSnackBar.error(
+            key: const ValueKey('snackbarError'),
+            context: context,
+            message: context.s.selectedLocationOutOfYourLocationRadius,
+          ),
+        );
+        return false;
+      }
+
+      ///
+    } else {
+      context.showSnackBar(
+        MorphemeSnackBar.error(
+          key: const ValueKey('snackbarError'),
+          context: context,
+          message: context.s.enableYourDeviceLocation,
+        ),
+      );
+      return false;
+    }
   }
 
   void getCurrentLocation() {

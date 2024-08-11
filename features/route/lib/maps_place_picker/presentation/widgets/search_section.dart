@@ -32,7 +32,7 @@ class SearchSection extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     )
                   : null,
-              hintText: "Cari lokasi",
+              hintText: context.s.searchLocation,
             ),
           ),
           if (autocompleteSearch.isNotEmpty) ...[
