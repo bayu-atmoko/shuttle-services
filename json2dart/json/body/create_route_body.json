@@ -1,0 +1,12 @@
+{
+  "total_distance": 10,
+  "total_duration": 10,
+  "route": [
+    {
+      "origin_report_id": 13,
+      "destination_report_id": 15,
+      "duration": 13,
+      "distance": 21
+    }
+  ]
+}

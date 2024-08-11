@@ -1,0 +1,43 @@
+{
+    "success": true,
+    "message": "Successfully created a new report",
+    "data": {
+        "report": {
+            "description": "Banyak sampah berserakan",
+            "complaint_id": 1,
+            "location_id": 35,
+            "creator_id": 65,
+            "status": "baru",
+            "updated_at": "2024-06-14T15:58:07.000000Z",
+            "created_at": "2024-06-14T15:58:07.000000Z",
+            "report_id": 14
+        },
+        "report_media": [
+            {
+                "report_id": 14,
+                "media_path": "https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2@2x.png",
+                "updated_at": "2024-06-14T15:58:07.000000Z",
+                "created_at": "2024-06-14T15:58:07.000000Z",
+                "report_media_id": 22
+            },
+            {
+                "report_id": 14,
+                "media_path": "https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2@2x.png",
+                "updated_at": "2024-06-14T15:58:07.000000Z",
+                "created_at": "2024-06-14T15:58:07.000000Z",
+                "report_media_id": 23
+            }
+        ],
+        "location": {
+            "name": "Pasar Kiaracondong",
+            "address": "Jl Mars Barat No. 2",
+            "latitude": -6.2,
+            "longitude": 106.816666,
+            "district": "buahbatu",
+            "village": "sekejati",
+            "updated_at": "2024-06-14T15:58:07.000000Z",
+            "created_at": "2024-06-14T15:58:07.000000Z",
+            "location_id": 35
+        }
+    }
+}

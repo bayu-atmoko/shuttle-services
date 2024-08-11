@@ -1,4 +1,16 @@
 {
-    "id": 4,
-    "token": "QpwL5tke4Pnpja7X4"
+    "success": true,
+    "message": "Successfully created a new account",
+    "data": {
+        "data": {
+            "email": "test41@dispostable.com",
+            "name": "testing 7",
+            "phone": "081312341234",
+            "role": "masyarakat",
+            "updated_at": "2024-06-14T15:55:50.000000Z",
+            "created_at": "2024-06-14T15:55:50.000000Z",
+            "user_id": 65
+        },
+        "token": "45|0eLIYR00aOqPrF2P2dejGm8rMIzDZ6IrK5jtM8Cm0f4a12b5"
+    }
 }

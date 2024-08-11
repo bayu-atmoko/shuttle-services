@@ -1,0 +1,36 @@
+{
+  "rows": [
+    {
+      "elements": [
+        {
+          "origin_report_id": 13,
+          "destination_report_id": 13,
+          "duration": 0,
+          "distance": 0
+        },
+        {
+          "origin_report_id": 13,
+          "destination_report_id": 14,
+          "duration": 13,
+          "distance": 21
+        }
+      ]
+    },
+    {
+      "elements": [
+        {
+          "origin_report_id": 14,
+          "destination_report_id": 13,
+          "duration": 12,
+          "distance": 20
+        },
+        {
+          "origin_report_id": 14,
+          "destination_report_id": 14,
+          "duration": 0,
+          "distance": 0
+        }
+      ]
+    }
+  ]
+}

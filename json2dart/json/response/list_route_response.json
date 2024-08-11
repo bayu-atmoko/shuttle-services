@@ -1,0 +1,114 @@
+{
+    "success": true,
+    "message": "Successfully obtained the user list",
+    "data": {
+        "data": [
+            {
+                "route_id": 5,
+                "total_distance": 100,
+                "total_duration": 100,
+                "origin_location_id": 29,
+                "destination_location_id": 30,
+                "created_at": "2024-06-14T15:02:22.000000Z",
+                "updated_at": "2024-06-14T15:02:22.000000Z",
+                "deleted_at": null,
+                "origin": {
+                    "location_id": 29,
+                    "name": "name",
+                    "address": "address",
+                    "latitude": 222222,
+                    "longitude": 111111,
+                    "created_at": "2024-06-14T15:02:22.000000Z",
+                    "updated_at": "2024-06-14T15:02:22.000000Z",
+                    "deleted_at": null,
+                    "district": "district",
+                    "village": "village"
+                },
+                "destination": {
+                    "location_id": 30,
+                    "name": "name",
+                    "address": "address",
+                    "latitude": 222222,
+                    "longitude": 111111,
+                    "created_at": "2024-06-14T15:02:22.000000Z",
+                    "updated_at": "2024-06-14T15:02:22.000000Z",
+                    "deleted_at": null,
+                    "district": "district",
+                    "village": "village"
+                }
+            },
+            {
+                "route_id": 4,
+                "total_distance": 100,
+                "total_duration": 100,
+                "origin_location_id": 26,
+                "destination_location_id": 27,
+                "created_at": "2024-06-14T15:01:35.000000Z",
+                "updated_at": "2024-06-14T15:01:35.000000Z",
+                "deleted_at": null,
+                "origin": {
+                    "location_id": 26,
+                    "name": "name",
+                    "address": "address",
+                    "latitude": 222222,
+                    "longitude": 111111,
+                    "created_at": "2024-06-14T15:01:35.000000Z",
+                    "updated_at": "2024-06-14T15:01:35.000000Z",
+                    "deleted_at": null,
+                    "district": "district",
+                    "village": "village"
+                },
+                "destination": {
+                    "location_id": 27,
+                    "name": "name",
+                    "address": "address",
+                    "latitude": 222222,
+                    "longitude": 111111,
+                    "created_at": "2024-06-14T15:01:35.000000Z",
+                    "updated_at": "2024-06-14T15:01:35.000000Z",
+                    "deleted_at": null,
+                    "district": "district",
+                    "village": "village"
+                }
+            },
+            {
+                "route_id": 3,
+                "total_distance": 100,
+                "total_duration": 100,
+                "origin_location_id": 23,
+                "destination_location_id": 24,
+                "created_at": "2024-06-14T14:23:10.000000Z",
+                "updated_at": "2024-06-14T14:23:10.000000Z",
+                "deleted_at": null,
+                "origin": {
+                    "location_id": 23,
+                    "name": "name",
+                    "address": "address",
+                    "latitude": 222222,
+                    "longitude": 111111,
+                    "created_at": "2024-06-14T14:23:10.000000Z",
+                    "updated_at": "2024-06-14T14:23:10.000000Z",
+                    "deleted_at": null,
+                    "district": "district",
+                    "village": "village"
+                },
+                "destination": {
+                    "location_id": 24,
+                    "name": "name",
+                    "address": "address",
+                    "latitude": 222222,
+                    "longitude": 111111,
+                    "created_at": "2024-06-14T14:23:10.000000Z",
+                    "updated_at": "2024-06-14T14:23:10.000000Z",
+                    "deleted_at": null,
+                    "district": "district",
+                    "village": "village"
+                }
+            }
+        ],
+        "total": 3,
+        "per_page": 10,
+        "current_page": 1,
+        "last_page": 1
+    }
+}

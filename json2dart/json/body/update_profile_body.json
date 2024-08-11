@@ -1,0 +1,13 @@
+{
+    "name": "admin 2 baru",
+    "role": "admin",
+    "password": "Testing1@",
+    "address": "Jl Mars Barat 1 No. 5 baru",
+    "village": "Margahayu baru",
+    "district": "Buahbatu baru",
+    "regency": "Bandung baru",
+    "province": "Jawa Barat baru",
+    "gender": "female",
+    "profile_picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1920px-Laravel.svg.png",
+    "phone": "08122222222221"
+}

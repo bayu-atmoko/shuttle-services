@@ -1,0 +1,17 @@
+{
+    "success": true,
+    "message": "Successfully updated the user",
+    "data": {
+        "user_id": 59,
+        "email": "admin2@dispostable.com",
+        "name": "admin 2 baru ini testing",
+        "role": "admin",
+        "phone": "08122222222221",
+        "address": "Jl Mars Barat 1 No. 5 baru_Margahayu baru_Buahbatu baru_Bandung baru_Jawa Barat baru",
+        "gender": "female",
+        "profile_picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1920px-Laravel.svg.png",
+        "deleted_at": null,
+        "created_at": "2024-06-14T07:58:17.000000Z",
+        "updated_at": "2024-06-14T17:46:36.000000Z"
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "description": "Banyak sampah berserakan lama",
+    "complaint_id": 1,
+    "district": "buahbatu lama",
+    "village": "sekejati lama",
+    "address": "Jl Mars Barat No. 2 lama",
+    "latitude": -6.200001,
+    "longitude": 106.816661,
+    "location_name": "Pasar Kiaracondong lama",
+    "status": "dibersihkan",
+    "officer_id": 50,
+    "cancellation_reason": "cancellationReason",
+    "garbage_photo": [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1920px-WhatsApp.svg.png"
+    ]
+}

@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "message": "Successfully obtained the recommendation route",
+  "data": [
+    {
+      "origin_report_id": 13,
+      "destination_report_id": 14,
+      "duration": 13,
+      "distance": 21
+    }
+  ]
+}

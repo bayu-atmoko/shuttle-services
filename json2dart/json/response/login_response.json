@@ -1,3 +1,20 @@
 {
-    "token": "QpwL5tke4Pnpja7X4"
+    "success": true,
+    "message": "Login successful",
+    "data": {
+        "profile": {
+            "user_id": 62,
+            "email": "petugas1@dispostable.com",
+            "name": "petugas 1",
+            "role": "petugas",
+            "phone": "0812222222222",
+            "address": "Jl Mars Barat 1 No. 5_Margahayu_Buahbatu_Bandung_Jawa Barat",
+            "gender": "male",
+            "profile_picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1920px-Laravel.svg.png",
+            "deleted_at": null,
+            "created_at": "2024-06-14T14:20:06.000000Z",
+            "updated_at": "2024-06-14T14:20:06.000000Z"
+        },
+        "access_token": "43|JhCuODnWPwMwx07EvIaHLTc357vYNFdlYTzhu1zR4d46e417"
+    }
 }

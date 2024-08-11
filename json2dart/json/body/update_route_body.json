@@ -1,0 +1,33 @@
+{
+    "total_distance": 100,
+    "total_duration": 100,
+    "origin": {
+        "name": "name",
+        "address": "address",
+        "district": "district",
+        "village": "village",
+        "latitude": 222222,
+        "longitude": 111111
+    },
+    "destination": {
+        "name": "name",
+        "address": "address",
+        "district": "district",
+        "village": "village",
+        "latitude": 222222,
+        "longitude": 111111
+    },
+    "step": [
+        {
+            "step_number": 1,
+            "distance": 20,
+            "duration": 30,
+            "name": "name",
+            "address": "address",
+            "district": "district",
+            "village": "village",
+            "latitude": 222222,
+            "longitude": 111111
+        }
+    ]
+}
