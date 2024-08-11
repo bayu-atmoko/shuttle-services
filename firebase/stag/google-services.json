@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "51546452666",
-    "project_id": "resik-app",
-    "storage_bucket": "resik-app.appspot.com"
+    "project_number": "112923082954",
+    "project_id": "shuttle-service-423a8",
+    "storage_bucket": "shuttle-service-423a8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:51546452666:android:8d5875b892d958f156c883",
+        "mobilesdk_app_id": "1:112923082954:android:ea8cae31369f70d9bbb433",
         "android_client_info": {
-          "package_name": "com.resik.app"
+          "package_name": "shuttle.services.apps"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB-Q8V_91zapU949bupGeR_Epk168WvqS0"
+          "current_key": "AIzaSyAhYkio2Nk__hnBEHbCBEcuOuV4IP4KCX8"
         }
       ],
       "services": {
