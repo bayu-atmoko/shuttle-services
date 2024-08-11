@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "51546452666",
+    "project_id": "resik-app",
+    "storage_bucket": "resik-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51546452666:android:8d5875b892d958f156c883",
+        "android_client_info": {
+          "package_name": "com.resik.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-Q8V_91zapU949bupGeR_Epk168WvqS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
