@@ -10,7 +10,7 @@ class NewRegister extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text.rich(
       TextSpan(
-        text: context.s.newAccount,
+        text: context.s.doYouHaveAccount,
         children: [
           TextSpan(
             text: ' ${context.s.register}',

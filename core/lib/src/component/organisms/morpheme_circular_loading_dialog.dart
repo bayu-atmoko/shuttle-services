@@ -54,7 +54,7 @@ class MorphemeCircularLoadingDialogWidget extends StatelessWidget {
                 const CircularProgressIndicator(),
                 const MorphemeSpacing.vertical24(),
                 Text(
-                  "Mohon tunggu sebentar",
+                  context.s.pleaseWaitForAMoment,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: context.color.primary,

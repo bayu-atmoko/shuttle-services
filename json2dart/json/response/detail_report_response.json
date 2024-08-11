@@ -1,0 +1,60 @@
+{
+  "success": true,
+  "message": "Successfully obtained the report",
+  "data": {
+    "report": {
+      "report_id": 14,
+      "creator_id": 65,
+      "officer_id": 1,
+      "status": "baru",
+      "description": "Banyak sampah berserakan",
+      "complaint_id": 1,
+      "location_id": 35,
+      "route_id": 1,
+      "created_at": "2024-06-14T15:58:07.000000Z",
+      "updated_at": "2024-06-14T15:58:07.000000Z",
+      "finished_at": "2024-06-14T15:58:07.000000Z",
+      "priority": 3,
+      "cancellation_reason": "cancellation_reason",
+      "deleted_at": "2024-06-14T15:58:07.000000Z",
+      "officer_name": "petugas 1",
+      "creator_name": "testing 7 baru sekali",
+      "creator_phone": "08111122222",
+      "complaint_title": "tumpukan sampah"
+    },
+    "report_media": [
+      {
+        "report_media_id": 22,
+        "report_id": 14,
+        "type": "report",
+        "media_path": "https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2@2x.png",
+        "created_at": "2024-06-14T15:58:07.000000Z",
+        "updated_at": "2024-06-14T15:58:07.000000Z",
+        "deleted_at": "2024-06-14T15:58:07.000000Z"
+      }
+    ],
+    "garbage_photo_cleaned": [
+      {
+        "report_media_id": 22,
+        "report_id": 14,
+        "type": "report_cleaned",
+        "media_path": "https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2@2x.png",
+        "created_at": "2024-06-14T15:58:07.000000Z",
+        "updated_at": "2024-06-14T15:58:07.000000Z",
+        "deleted_at": "2024-06-14T15:58:07.000000Z"
+      }
+    ],
+    "location": {
+      "location_id": 35,
+      "name": "Pasar Kiaracondong",
+      "address": "Jl Mars Barat No. 2",
+      "latitude": -6.2,
+      "longitude": 106.816666,
+      "created_at": "2024-06-14T15:58:07.000000Z",
+      "updated_at": "2024-06-14T15:58:07.000000Z",
+      "deleted_at": "2024-06-14T15:58:07.000000Z",
+      "district": "buahbatu",
+      "village": "sekejati"
+    }
+  }
+}

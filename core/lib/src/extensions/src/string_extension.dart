@@ -20,3 +20,7 @@ extension StringExtension on String {
   String toInitialAvatarUrl() =>
       'https://ui-avatars.com/api/?background=F2F2F2&color=EB2139&name=$this&bold=true';
 }
+
+extension CustomGEStringNullExtension on String? {
+  String orNullToEmpty() => this == null ? '' : toString();
+}

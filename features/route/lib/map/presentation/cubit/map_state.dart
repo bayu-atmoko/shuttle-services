@@ -6,6 +6,8 @@ class MapStateCubit extends Equatable {
     this.currentLocation,
     required this.zoom,
     this.currentCameraPosition,
+    this.reportAssigned,
+    this.reportCleaned,
     this.markerReportLatLng,
     this.routeId,
   });
@@ -15,7 +17,10 @@ class MapStateCubit extends Equatable {
   final LocationData? currentLocation;
   final double zoom;
   final CameraPosition? currentCameraPosition;
-  
+
+  /// report
+  final List<AlphaDataListReport>? reportAssigned;
+  final List<AlphaDataListReport>? reportCleaned;
   final List<LatLng>? markerReportLatLng;
 
   // route
@@ -26,6 +31,8 @@ class MapStateCubit extends Equatable {
     LocationData? currentLocation,
     double? zoom,
     CameraPosition? currentCameraPosition,
+    List<AlphaDataListReport>? reportAssigned,
+    List<AlphaDataListReport>? reportCleaned,
     List<LatLng>? markerReportLatLng,
     int? routeId,
   }) {
@@ -35,6 +42,8 @@ class MapStateCubit extends Equatable {
       zoom: zoom ?? this.zoom,
       currentCameraPosition:
           currentCameraPosition ?? this.currentCameraPosition,
+      reportAssigned: reportAssigned ?? this.reportAssigned,
+      reportCleaned: reportCleaned ?? this.reportCleaned,
       markerReportLatLng: markerReportLatLng ?? this.markerReportLatLng,
       routeId: routeId ?? this.routeId,
     );
@@ -46,6 +55,8 @@ class MapStateCubit extends Equatable {
         currentLocation,
         zoom,
         currentCameraPosition,
+        reportAssigned,
+        reportCleaned,
         markerReportLatLng,
         routeId,
       ];

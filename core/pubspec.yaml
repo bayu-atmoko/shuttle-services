@@ -17,6 +17,9 @@ dependencies:
   #Intl for localizations
   intl: ^0.18.0
 
+  # UUID
+  uuid: ^4.4.0
+
   dependency_manager:
     path: ./packages/dependency_manager
   morpheme_library:

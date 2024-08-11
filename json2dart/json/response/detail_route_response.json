@@ -1,0 +1,58 @@
+{
+    "success": true,
+    "message": "Successfully obtained the route",
+    "data": {
+        "route_id": 5,
+        "total_distance": 100,
+        "total_duration": 100,
+        "origin": {
+            "location_id": 29,
+            "name": "name",
+            "address": "address",
+            "latitude": 222222,
+            "longitude": 111111,
+            "created_at": "2024-06-14T15:02:22.000000Z",
+            "updated_at": "2024-06-14T15:02:22.000000Z",
+            "deleted_at": null,
+            "district": "district",
+            "village": "village"
+        },
+        "destination": {
+            "location_id": 30,
+            "name": "name",
+            "address": "address",
+            "latitude": 222222,
+            "longitude": 111111,
+            "created_at": "2024-06-14T15:02:22.000000Z",
+            "updated_at": "2024-06-14T15:02:22.000000Z",
+            "deleted_at": null,
+            "district": "district",
+            "village": "village"
+        },
+        "step": [
+            {
+                "step_id": 3,
+                "route_id": 5,
+                "step_number": 1,
+                "distance": 20,
+                "duration": 20,
+                "destination_location_id": 31,
+                "created_at": "2024-06-14T15:02:22.000000Z",
+                "updated_at": "2024-06-14T15:02:22.000000Z",
+                "deleted_at": null,
+                "destination": {
+                    "location_id": 31,
+                    "name": "name",
+                    "address": "address",
+                    "latitude": 222222,
+                    "longitude": 111111,
+                    "created_at": "2024-06-14T15:02:22.000000Z",
+                    "updated_at": "2024-06-14T15:02:22.000000Z",
+                    "deleted_at": null,
+                    "district": "district",
+                    "village": "village"
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,7 @@
+{
+  "success": true,
+  "message": "Successfully created a new route",
+  "data": {
+    "route_id": 16
+  }
+}

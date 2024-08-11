@@ -39,7 +39,7 @@ class GoogleMapsSectionState extends State<GoogleMapsSection> {
             currentLocation.longitude!,
           ),
           infoWindow: InfoWindow(
-            title: "Lokasi terkini",
+            title: context.s.currentLocation,
           ),
         ),
       );
@@ -55,7 +55,7 @@ class GoogleMapsSectionState extends State<GoogleMapsSection> {
             element.longitude,
           ),
           infoWindow: InfoWindow(
-            title: 'Lokasi ${index + 1}',
+            title: '${context.s.report} ${index + 1}',
           ),
         ),
       );
@@ -67,7 +67,7 @@ class GoogleMapsSectionState extends State<GoogleMapsSection> {
               color: context.color.grey2,
               alignment: Alignment.center,
               child: MorphemeText.titleSmall(
-                "Aktifkan lokasi",
+                context.s.enableDeviceLocation,
                 textAlign: TextAlign.center,
               ),
             )

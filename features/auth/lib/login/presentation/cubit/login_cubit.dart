@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:main/expired_token/domain/repositories/expired_token_repository.dart';
 
 import '../../data/models/body/login_body.dart';
 import '../bloc/login/login_bloc.dart';
@@ -7,12 +8,22 @@ import '../bloc/login/login_bloc.dart';
 part 'login_state.dart';
 
 class LoginCubit extends MorphemeCubit<LoginStateCubit> {
-  LoginCubit({required this.loginBloc}) : super(LoginStateCubit());
+  LoginCubit({
+    required this.loginBloc,
+  }) : super(const LoginStateCubit());
 
   final LoginBloc loginBloc;
 
   final emailKey = GlobalKey<MorphemeTextFieldState>();
   final passwordKey = GlobalKey<MorphemeTextFieldState>();
+
+  @override
+  void initState(BuildContext context) {
+    super.initState(context);
+
+    /// clear value in ExpiredTokenRepository
+    locator<ExpiredTokenRepository>().clearValue();
+  }
 
   @override
   List<BlocProvider> blocProviders(BuildContext context) => [
@@ -29,15 +40,21 @@ class LoginCubit extends MorphemeCubit<LoginStateCubit> {
     loginBloc.close();
   }
 
-  void onLoginWithFacebookPressed() {}
+  @override
+  void initAfterFirstLayout(BuildContext context) async {
+    super.initAfterFirstLayout(context);
 
-  void onLoginWithGooglePressed() {}
+    bool isRememberMe = await FlutterSecureStorageHelper.isRememberMe();
+    if (isRememberMe) {
+      String? email = await FlutterSecureStorageHelper.getEmail();
+      String? password = await FlutterSecureStorageHelper.getPassword();
+      emailKey.text = email.orEmpty();
+      passwordKey.text = password.orEmpty();
 
-  void onLoginWithApplePressed() {}
-
-  void onAccountDemoPressed(BuildContext context) {
-    emailKey.text = 'eve.holt@reqres.in';
-    passwordKey.text = 'cityslicka';
+      emit(state.copyWith(
+        isRememberMe: true,
+      ));
+    }
   }
 
   void onForgotPasswordPressed(BuildContext context) {
@@ -65,8 +82,36 @@ class LoginCubit extends MorphemeCubit<LoginStateCubit> {
 
   void _listenerLogin(BuildContext context, LoginState state) {
     state.when(
-      onFailed: (state) => state.failure.showSnackbar(context),
-      onSuccess: (state) => context.goToHome(),
+      onFailed: (state) => context.showSnackBar(
+        MorphemeSnackBar.error(
+          key: const ValueKey('snackbarError'),
+          context: context,
+          message: context.s.errorLoginMessage,
+        ),
+      ),
+      onSuccess: (state) {
+        _setRememberMe();
+        context.goToHome(state.data.data?.profile?.role ?? '');
+      },
     );
+  }
+
+  void onRememberMeChanged(bool? value) async {
+    if (value != null) {
+      await FlutterSecureStorageHelper.saveRememberMe(value);
+    }
+    emit(state.copyWith(
+      isRememberMe: value ?? !state.isRememberMe,
+    ));
+  }
+
+  void _setRememberMe() async {
+    if (state.isRememberMe) {
+      await FlutterSecureStorageHelper.saveEmail(emailKey.text);
+      await FlutterSecureStorageHelper.savePassword(passwordKey.text);
+    } else {
+      await FlutterSecureStorageHelper.removeEmail();
+      await FlutterSecureStorageHelper.removePassword();
+    }
   }
 }

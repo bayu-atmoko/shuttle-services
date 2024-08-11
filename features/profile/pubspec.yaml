@@ -14,6 +14,8 @@ dependencies:
 
   core:
     path: ../../core
+  main:
+    path: ../main
 
 dev_dependencies:
   flutter_test:

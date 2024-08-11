@@ -1,0 +1,7 @@
+{
+    "success": true,
+    "message": "Successfully upload the file",
+    "data": {
+        "image_url": "http://localhost:8000/storage/report/a6jiqkrPACV3MvhKjMKsIjQwciq1foHt8A3jTTgX.png"
+    }
+}

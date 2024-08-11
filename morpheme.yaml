@@ -1,0 +1,70 @@
+flavor:
+  dev:
+    FLAVOR: dev
+    APP_NAME: Shuttle Services Dev
+    NAMESPACE: "shuttle.services.apps"
+    ANDROID_APPLICATION_ID: shuttle.services.apps.dev
+    IOS_APPLICATION_ID: shuttle.services.apps.dev
+    BASE_URL: https://resik-backend-nars3tmsfq-et.a.run.app/api
+    MAPS_API_KEY: AIzaSyDqipjuQViV2eCtgmoFNeOcmcxDt_DPaoM
+  stag:
+    FLAVOR: stag
+    APP_NAME: Shuttle Services Stag
+    NAMESPACE: "shuttle.services.apps"
+    ANDROID_APPLICATION_ID: shuttle.services.apps.stag
+    IOS_APPLICATION_ID: shuttle.services.apps.stag
+    BASE_URL: https://resik-backend-nars3tmsfq-et.a.run.app/api
+    MAPS_API_KEY: AIzaSyDqipjuQViV2eCtgmoFNeOcmcxDt_DPaoM
+  prod:
+    FLAVOR: prod
+    APP_NAME: Shuttle Services
+    NAMESPACE: "shuttle.services.apps"
+    ANDROID_APPLICATION_ID: shuttle.services.apps
+    IOS_APPLICATION_ID: shuttle.services.apps
+    BASE_URL: https://resik-backend-nars3tmsfq-et.a.run.app/api
+    MAPS_API_KEY: AIzaSyDqipjuQViV2eCtgmoFNeOcmcxDt_DPaoM
+
+firebase:
+#  google_service_dev_dir: firebase/dev
+#  google_service_stag_dir: firebase/stag
+#  google_service_prod_dir: firebase/prod
+#  output_android_dir: android/app
+# #  output_ios_dir: ios
+#  dev:
+#    project_id: "resik-app"
+#  stag:
+#    project_id: "resik-app"
+#  prod:
+#    project_id: "resik-app"
+
+localization:
+  arb_dir: assets/assets/l10n
+  template_arb_file: id.arb
+  output_localization_file: s.dart
+  output_class: S
+  output_dir: core/lib/src/l10n
+  replace: false
+
+assets:
+  pubspec_dir: assets
+  output_dir: assets/lib
+  create_library_file: true
+  
+coverage:
+  lcov_dir: coverage/lcov.info
+  output_html_dir: coverage/html
+  remove:
+    - "*/mock/*"
+    - "*.freezed.*"
+    - "*.g.*"
+    - "*/l10n/*"
+    - "*_state.dart"
+    - "*_event.dart"
+    - "**/locator.dart"
+    - "**/environtment.dart"
+    - "core/lib/src/test/*"
+    - "core/lib/src/constants/*"
+    - "core/lib/src/themes/*"
+    - "lib/routes/routes.dart"
+    - "lib/generated_plugin_registrant.dart"
+

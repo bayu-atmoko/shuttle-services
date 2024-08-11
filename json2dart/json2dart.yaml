@@ -75,36 +75,136 @@ json2dart:
       base_url: *base_url
       path: /login
       method: post
-      # header: json2dart/json/header/login_header.json
       body: json2dart/json/body/login_body.json
       response: json2dart/json/response/login_response.json
-      cache_strategy: async_or_cache
     .register: &register
       base_url: *base_url
       path: /register
       method: post
-      # header: json2dart/json/header/register_header.json
       body: json2dart/json/body/register_body.json
       response: json2dart/json/response/register_response.json
-      cache_strategy:
-        strategy: cache_or_async
-        ttl: 60
-    .forgot_password: &forgot_password
+    .logout: &logout
       base_url: *base_url
-      path: /forgot_password
+      path: /logout
+      method: post
+      response: json2dart/json/response/general_response.json
+    .profile: &profile
+      base_url: *base_url
+      path: /profile
       method: get
-      # header: json2dart/json/header/forgot_password_header.json
-      body: json2dart/json/body/forgot_password_body.json
-      response: json2dart/json/response/forgot_password_response.json
-      cache_strategy:
-        strategy: just_cache
-        ttl: 120
-        keep_expired_cache: true
+      response: json2dart/json/response/profile_response.json
+    .edit_profile: &edit_profile
+      base_url: *base_url
+      path: /profile
+      method: put
+      body: json2dart/json/body/update_profile_body.json
+      response: json2dart/json/response/update_profile_response.json
+    .change_password: &change_password
+      base_url: *base_url
+      path: /change-password
+      method: put
+      body: json2dart/json/body/change_password_body.json
+      response: json2dart/json/response/general_response.json
+    .complaint: &complaint
+      base_url: *base_url
+      path: /complaint
+      method: get
+      response: json2dart/json/response/complaint_response.json
+    .create_report: &create_report
+      base_url: *base_url
+      path: /report
+      method: post
+      body: json2dart/json/body/create_report_body.json
+      response: json2dart/json/response/create_report_response.json
+    .edit_report: &edit_report
+      base_url: *base_url
+      path: /report/:report_id
+      method: put
+      body: json2dart/json/body/edit_report_body.json
+      response: json2dart/json/response/edit_report_response.json
+    .detail_report: &detail_report
+      base_url: *base_url
+      path: /report/:report_id
+      method: get
+      response: json2dart/json/response/detail_report_response.json
+    .list_report: &list_report
+      base_url: *base_url
+      path: /report?page=:page&per_page=:per_page&status=:status&search=:search&sort=:sort&sort_type=:sort_type&start_date=:start_date&end_date=:end_date
+      method: get
+      response: json2dart/json/response/list_report_response.json
+    .delete_report: &delete_report
+      base_url: *base_url
+      path: /report/:report_id
+      method: delete
+      response: json2dart/json/response/general_response.json
+    .create_route: &create_route
+      base_url: *base_url
+      path: /route
+      method: post
+      body: json2dart/json/body/create_route_body.json
+      response: json2dart/json/response/create_route_response.json
+    .update_route: &update_route
+      base_url: *base_url
+      path: /route/:route_id
+      method: put
+      body: json2dart/json/body/update_route_body.json
+      response: json2dart/json/response/update_route_response.json
+    .detail_route: &detail_route
+      base_url: *base_url
+      path: /route/:route_id
+      method: get
+      response: json2dart/json/response/detail_route_response.json
+    .list_route: &list_route
+      base_url: *base_url
+      path: /route?page=:page&per_page=:per_page&sort=:sort&sort_type=:sort_type
+      method: get
+      response: json2dart/json/response/list_route_response.json
+    .upload_file: &upload_file
+      base_url: *base_url
+      path: /upload
+      method: multipart
+      body: json2dart/json/body/upload_file_body.json
+      response: json2dart/json/response/upload_file_response.json
+    .route_optimization: &route_optimization
+      base_url: *base_url
+      path: /optimize-route
+      method: post
+      body: json2dart/json/body/route_optimization_body.json
+      response: json2dart/json/response/route_optimization_response.json
 
 auth:
   login:
     login: *login
   register:
     register: *register
-  forgot_password:
-    forgot_password: *forgot_password
+profile:
+  profile:
+    profile: *profile
+    logout: *logout
+  edit_profile:
+    edit_profile: *edit_profile
+  change_password:
+    change_password: *change_password
+home:
+  home:
+    list_report: *list_report
+  create_report:
+    complaint: *complaint
+    create_report: *create_report
+  detail_report:
+    detail_report: *detail_report
+    delete_report: *delete_report
+  finish_report:
+    edit_report: *edit_report
+route:
+  route_recommendation:
+    create_route: *create_route
+    update_route: *update_route
+    route_optimization: *route_optimization
+  list_route:
+    list_route: *list_route
+  detail_route:
+    detail_route: *detail_route
+main:
+  upload_file:
+    upload_file: *upload_file

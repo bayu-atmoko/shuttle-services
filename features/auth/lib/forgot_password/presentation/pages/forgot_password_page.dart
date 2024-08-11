@@ -2,7 +2,6 @@ import 'package:auth/forgot_password/presentation/bloc/forgot_password/forgot_pa
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-import '../../../shared/helper/validator_value_helper.dart';
 import '../cubit/forgot_password_cubit.dart';
 
 class ForgotPasswordPage extends StatefulWidget {

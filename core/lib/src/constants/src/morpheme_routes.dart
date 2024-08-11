@@ -1,10 +1,8 @@
-import 'package:core/src/extensions/extensions.dart';
 import 'package:core/src/global_variable.dart';
+import 'package:core/src/shared/extras/extras.dart';
 import 'package:dependency_manager/dependency_manager.dart'
-    show GoRouter, GoRouterHelper;
+    show GoRouter, GoRouterHelper, LatLng;
 import 'package:flutter/material.dart' show BuildContext;
-
-import '../../shared/extras/extras.dart';
 
 String joinRoutes(List<String> paths) {
   if (paths.isEmpty) {
@@ -34,14 +32,19 @@ abstract final class MorphemeRoutes {
 
   static const String main = 'main';
   static const String home = 'home';
-  static const String news = 'news';
+  static const String help = 'help';
+  static const String map = 'map';
   static const String profile = 'profile';
 
-  static const String selling = 'selling';
-
-  static const String onboarding = 'onboarding';
+  static const String createReport = 'create-report';
+  static const String detailReport = 'detail-report';
+  static const String detailMaps = 'detail-maps';
   static const String mapsPlacePicker = 'maps-place-picker';
-  static const String map = 'map';
+
+  static const String changePassword = 'change-password';
+  static const String editProfile = 'edit-profile';
+
+  static const String detailRoute = 'detail-route';
 }
 
 abstract final class PathRoutes {
@@ -51,16 +54,30 @@ abstract final class PathRoutes {
       dynamicRoutes(MorphemeRoutes.forgotPassword);
 
   static String get home => joinRoutes([MorphemeRoutes.home]);
-  static String get news => joinRoutes([MorphemeRoutes.news]);
+  static String get help => joinRoutes([MorphemeRoutes.help]);
+  static String get map => joinRoutes([MorphemeRoutes.map]);
   static String get profile => joinRoutes([MorphemeRoutes.profile]);
 
-  static String get selling => dynamicRoutes(MorphemeRoutes.selling);
+  static String get createReport => dynamicRoutes(MorphemeRoutes.createReport);
+  static String get detailReport =>
+      joinRoutes([home, MorphemeRoutes.detailReport]);
+  static String get editReport =>
+      joinRoutes([detailReport, MorphemeRoutes.createReport]);
+  static String get detailMaps =>
+      joinRoutes([detailReport, MorphemeRoutes.detailMaps]);
+  static String get mapsPlacePicker => joinRoutes([
+        home,
+        MorphemeRoutes.createReport,
+        MorphemeRoutes.mapsPlacePicker,
+      ]);
 
-  static String get onboarding => joinRoutes([MorphemeRoutes.onboarding]);
-  static String get mapsPlacePicker =>
-      joinRoutes([MorphemeRoutes.mapsPlacePicker]);
-  static String get map =>
-      joinRoutes([PathRoutes.mapsPlacePicker, MorphemeRoutes.map]);
+  static String get changePassword =>
+      joinRoutes([profile, MorphemeRoutes.changePassword]);
+  static String get editProfile =>
+      joinRoutes([profile, MorphemeRoutes.editProfile]);
+
+  static String get detailRoute =>
+      joinRoutes([map, MorphemeRoutes.detailRoute]);
 }
 
 extension MorphemeRoutesContextExtension on BuildContext {
@@ -68,19 +85,40 @@ extension MorphemeRoutesContextExtension on BuildContext {
   void goToRegister() => go(PathRoutes.register);
   void goToForgotPassword() => go(PathRoutes.forgotPassword);
 
-  void goToHome() => go(PathRoutes.home);
-  void goToNews() => go(PathRoutes.news);
+  void goToHome(String userRole) => go(
+        PathRoutes.home,
+        extra: userRole,
+      );
+  void goToMap() => go(PathRoutes.map);
   void goToProfile() => go(PathRoutes.profile);
 
-  void goToSelling({
-    required Function(dynamic result) onReturn,
-  }) =>
-      goWithResult(PathRoutes.selling, onReturn: onReturn);
-
-  void goToOnboading() => go(PathRoutes.onboarding);
-  void goToMapsPlacePicker() => go(PathRoutes.mapsPlacePicker);
-  Future<ExtraPlacePicker?> goToMap(ExtraPlacePicker pageParams) => push(
-        PathRoutes.map,
+  Future<bool?> goToDetailReport(String reportId) => push(
+        PathRoutes.detailReport,
+        extra: reportId,
+      );
+  Future<ExtraPlacePicker?> goToMapsPlacePicker(ExtraPlacePicker pageParams) =>
+      push(
+        PathRoutes.mapsPlacePicker,
         extra: pageParams,
+      );
+  Future<bool?> goToCreateReport() => push(PathRoutes.createReport);
+  Future<bool?> goToEditReport(ExtraEditReport? report) => push(
+        PathRoutes.editReport,
+        extra: report,
+      );
+  void goToDetailMaps(LatLng locationLatLng) => push(
+        PathRoutes.detailMaps,
+        extra: locationLatLng,
+      );
+
+  void goToChangePassword() => go(PathRoutes.changePassword);
+  Future<bool?> goToEditProfile(ExtraUser? profile) => push(
+        PathRoutes.editProfile,
+        extra: profile,
+      );
+
+  void goToDetailRoute(String routeId) => go(
+        PathRoutes.detailRoute,
+        extra: routeId,
       );
 }

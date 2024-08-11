@@ -1,0 +1,22 @@
+{
+    "success": true,
+    "message": "Successfully obtained the user detail",
+    "data": {
+        "user_id": 59,
+        "email": "admin2@dispostable.com",
+        "name": "admin 2",
+        "role": "admin",
+        "phone": "0812222222222",
+        "address": "Jl Mars Barat 1 No. 5",
+        "gender": "male",
+        "vehicle": "vehicle",
+        "profile_picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1920px-Laravel.svg.png",
+        "deleted_at": null,
+        "created_at": "2024-06-14T07:58:17.000000Z",
+        "updated_at": "2024-06-14T07:58:17.000000Z",
+        "village": "Margahayu",
+        "district": "Buahbatu",
+        "regency": "Bandung",
+        "province": "Jawa Barat"
+    }
+}

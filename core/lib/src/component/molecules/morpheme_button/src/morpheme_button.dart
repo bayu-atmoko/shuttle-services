@@ -18,6 +18,7 @@ class MorphemeButton extends StatelessWidget {
     this.iconPosition = IconPosition.start,
     this.isLoading = false,
   }) : _type = TypeButton.elevated;
+
   const MorphemeButton.outlined({
     super.key,
     required this.text,
@@ -29,6 +30,7 @@ class MorphemeButton extends StatelessWidget {
     this.iconPosition = IconPosition.start,
     this.isLoading = false,
   }) : _type = TypeButton.outlined;
+
   const MorphemeButton.text({
     super.key,
     required this.text,
@@ -86,11 +88,8 @@ class MorphemeButton extends StatelessWidget {
                     style: style,
                     label: isLoading
                         ? const SizedBox()
-                        : MorphemeTextScaleDown(text, style: textStyle),
-                    icon: isLoading
-                        ? MorphemeCircularLoading(
-                            size: 24, color: context.color.white)
-                        : icon!,
+                        : _textScaleDownElevated(context),
+                    icon: isLoading ? _circularLoading(context) : icon!,
                   ),
                 );
               }
@@ -98,9 +97,8 @@ class MorphemeButton extends StatelessWidget {
                 onPressed: isLoading ? null : onPressed,
                 style: style,
                 child: isLoading
-                    ? MorphemeCircularLoading(
-                        size: 24, color: context.color.white)
-                    : MorphemeTextScaleDown(text, style: textStyle),
+                    ? _circularLoading(context)
+                    : _textScaleDownElevated(context),
               );
             case TypeButton.outlined:
               if (icon != null) {
@@ -111,23 +109,15 @@ class MorphemeButton extends StatelessWidget {
                   child: OutlinedButton.icon(
                     onPressed: isLoading ? null : onPressed,
                     style: style,
-                    label: isLoading
-                        ? const SizedBox()
-                        : MorphemeTextScaleDown(text, style: textStyle),
-                    icon: isLoading
-                        ? MorphemeCircularLoading(
-                            size: 24, color: context.color.black)
-                        : icon!,
+                    label: isLoading ? const SizedBox() : _textScaleDown(),
+                    icon: isLoading ? _circularLoading(context) : icon!,
                   ),
                 );
               }
               return OutlinedButton(
                 onPressed: isLoading ? null : onPressed,
                 style: style,
-                child: isLoading
-                    ? MorphemeCircularLoading(
-                        size: 24, color: context.color.black)
-                    : MorphemeTextScaleDown(text, style: textStyle),
+                child: isLoading ? _circularLoading(context) : _textScaleDown(),
               );
             default:
               if (icon != null) {
@@ -138,27 +128,38 @@ class MorphemeButton extends StatelessWidget {
                   child: TextButton.icon(
                     onPressed: isLoading ? null : onPressed,
                     style: style,
-                    label: isLoading
-                        ? const SizedBox()
-                        : MorphemeTextScaleDown(text, style: textStyle),
-                    icon: isLoading
-                        ? MorphemeCircularLoading(
-                            size: 24, color: context.color.black)
-                        : icon!,
+                    label: isLoading ? const SizedBox() : _textScaleDown(),
+                    icon: isLoading ? _circularLoading(context) : icon!,
                   ),
                 );
               }
               return TextButton(
                 onPressed: isLoading ? null : onPressed,
                 style: style,
-                child: isLoading
-                    ? MorphemeCircularLoading(
-                        size: 24, color: context.color.black)
-                    : MorphemeTextScaleDown(text, style: textStyle),
+                child: isLoading ? _circularLoading(context) : _textScaleDown(),
               );
           }
         },
       ),
     );
+  }
+
+  MorphemeTextScaleDown _textScaleDown() {
+    return MorphemeTextScaleDown(
+      text,
+      style: (textStyle ?? MorphemeTextTheme.labelExtraLarge.textStyle),
+    );
+  }
+
+  MorphemeTextScaleDown _textScaleDownElevated(BuildContext context) {
+    return MorphemeTextScaleDown(
+      text,
+      style: (textStyle ?? MorphemeTextTheme.labelExtraLarge.textStyle)
+          .copyWith(color: context.color.white),
+    );
+  }
+
+  MorphemeCircularLoading _circularLoading(BuildContext context) {
+    return MorphemeCircularLoading(size: 24, color: context.color.primary);
   }
 }

@@ -20,4 +20,5 @@ abstract final class MorphemeDataTesId {
   static const String buttonForgotPassword = 'buttonForgotPassword';
   static const String buttonLoginWithEmail = 'buttonLoginWithEmail';
   static const String newAccountRegister = 'newAccountRegister';
+  static const String rememberMe = 'rememberMe';
 }

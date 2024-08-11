@@ -1,0 +1,22 @@
+{
+    "success": true,
+    "message": "Successfully obtained data",
+    "data": [
+        {
+            "complaint_id": 1,
+            "title": "tumpukan sampah",
+            "complaint_type": "tumpukan_sampah",
+            "description": "tumpukan sampah",
+            "created_at": "2024-06-10T02:54:00.000000Z",
+            "updated_at": "2024-06-10T02:54:00.000000Z"
+        },
+        {
+            "complaint_id": 2,
+            "title": "sampah besar",
+            "complaint_type": "sampah_besar",
+            "description": "sampah besar",
+            "created_at": "2024-06-10T02:54:00.000000Z",
+            "updated_at": "2024-06-10T02:54:00.000000Z"
+        }
+    ]
+}

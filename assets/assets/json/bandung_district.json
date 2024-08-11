@@ -1,0 +1,284 @@
+[
+  {
+    "id": 1,
+    "name": "Andir",
+    "villages": [
+      "Campaka",
+      "Maleber",
+      "Garuda",
+      "Dunguscariang",
+      "Ciroyom",
+      "Kebonjeruk"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Antapani",
+    "villages": [
+      "Antapani Kidul",
+      "Antapani Tengah",
+      "Antapani Kulon",
+      "Antapani Wetan"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Arcamanik",
+    "villages": [
+      "Cisaranten Bina Harapan",
+      "Cisaranten Endah",
+      "Cisaranten Kulon",
+      "Sukamiskin"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Astana Anyar",
+    "villages": [
+      "Cibadak",
+      "Karanganyar",
+      "Karasak",
+      "Nyengseret",
+      "Panjunan",
+      "Pelindunghewan"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Babakan Ciparay",
+    "villages": [
+      "Babakan",
+      "Babakanciparay",
+      "Cirangrang",
+      "Margahayu Utara",
+      "Margasuka",
+      "Sukahaji"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Regol",
+    "villages": [
+      "Ancol",
+      "Balonggede",
+      "Ciateul",
+      "Cigereleng",
+      "Ciseureuh",
+      "Pasirluyu",
+      "Pungkur"
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Regol",
+    "villages": ["Cipunggung", "Regol", "Sukahaji", "Sukaresmi"]
+  },
+  {
+    "id": 7,
+    "name": "Bandung Kidul",
+    "villages": ["Batununggal", "Kujangsari", "Mengger", "Wates"]
+  },
+  {
+    "id": 8,
+    "name": "Bandung Kulon",
+    "villages": [
+      "Caringin",
+      "Cibuntu",
+      "Cigondewah Kaler",
+      "Cigondewah Kidul",
+      "Cigondewah Rahayu",
+      "Cijerah",
+      "Gempolsari",
+      "Warungmuncang"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Bandung Wetan",
+    "villages": ["Cihapit", "Citarum", "Tamansari"]
+  },
+  {
+    "id": 10,
+    "name": "Batununggal",
+    "villages": [
+      "Binong",
+      "Cibangkong",
+      "Gumuruh",
+      "Kacapiring",
+      "Kebongedang",
+      "Kebonwaru",
+      "Maleer",
+      "Samoja"
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Bojongloa Kaler",
+    "villages": [
+      "Babakan Asih",
+      "Babakan Tarogong",
+      "Jamika",
+      "Kopo",
+      "Suka Asih"
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Bojongloa Kidul",
+    "villages": [
+      "Cibaduyut",
+      "Cibaduyut Kidul",
+      "Cibaduyut Wetan",
+      "Kebon Lega",
+      "Mekarwangi",
+      "Situsaeur"
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Buahbatu",
+    "villages": ["Cijawura", "Jatisari", "Margasari", "Sekejati"]
+  },
+  {
+    "id": 14,
+    "name": "Cibiru",
+    "villages": ["Cipadung", "Cisurupan", "Palasari", "Pasirbiru"]
+  },
+  {
+    "id": 15,
+    "name": "Cinambo",
+    "villages": [
+      "Babakan Penghulu",
+      "Cisaranten Wetan",
+      "Pakemitan",
+      "Sukamulya"
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Cibeunying Kaler",
+    "villages": ["Cigadung", "Cihaurgeulis", "Neglasari", "Sukaluyu"]
+  },
+  {
+    "id": 17,
+    "name": "Cibeunying Kidul",
+    "villages": [
+      "Cicadas",
+      "Cikutra",
+      "Padasuka",
+      "Pasirlayung",
+      "Sukamaju",
+      "Sukapada"
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Cidadap",
+    "villages": ["Ciumbuleuit", "Hegarmanah", "Ledeng"]
+  },
+  {
+    "id": 19,
+    "name": "Coblong",
+    "villages": [
+      "Cipaganti",
+      "Dago",
+      "Lebakgede",
+      "Lebaksiliwangi",
+      "Sadangserang",
+      "Sekeloa"
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Gedebage",
+    "villages": [
+      "Cimincrang",
+      "Cisaranten Kidul",
+      "Rancabolang",
+      "Rancanumpang"
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Kiaracondong",
+    "villages": [
+      "Babakansari",
+      "Babakansurabaya",
+      "Cicaheum",
+      "Kebonkangkung",
+      "Kebunjayanti",
+      "Sukapura"
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Lengkong",
+    "villages": [
+      "Burangrang",
+      "Cijagra",
+      "Cikawao",
+      "Lingkar Selatan",
+      "Malabar",
+      "Paledang",
+      "Turangga"
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Mandalajati",
+    "villages": ["Jatihandap", "Karangpamulang", "Pasir Impun", "Sindangjaya"]
+  },
+  {
+    "id": 24,
+    "name": "Cicendo",
+    "villages": [
+      "Arjuna",
+      "Husen Sastranegara",
+      "Pajajaran",
+      "Pamoyanan",
+      "Pasirkaliki",
+      "Sukaraja"
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Panyileukan",
+    "villages": [
+      "Cipadung Kidul",
+      "Cipadung Kulon",
+      "Cipadung Wetan",
+      "Mekarmulya"
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Rancasari",
+    "villages": ["Cipamokolan", "Darwati", "Manjahlega", "Mekar Jaya"]
+  },
+  {
+    "id": 28,
+    "name": "Sukasari",
+    "villages": ["Gegerkalong", "Isola", "Sarijadi", "Sukarasa"]
+  },
+  {
+    "id": 29,
+    "name": "Sumur Bandung",
+    "villages": ["Babakanciamis", "Braga", "Kebonpisang", "Merdeka"]
+  },
+  {
+    "id": 30,
+    "name": "Ujungberung",
+    "villages": [
+      "Cigending",
+      "Pasanggrahan",
+      "Pasirendah",
+      "Pasirjati",
+      "Pasirwangi"
+    ]
+  },
+  {
+    "id": 31,
+    "name": "Sukajadi",
+    "villages": ["Cipedes", "Pasteur", "Sukabungah", "Sukagalih", "Sukawarna"]
+  }
+]

@@ -47,7 +47,7 @@ app.*.map.json
 
 coverage/
 test/coverage_helper_test.dart
-morpheme.yaml
+# morpheme.yaml
 **/pubspec_overrides.yaml
 .symbols
 
@@ -69,6 +69,6 @@ integration_test/test_bundle.dart
 
 # Firebase
 **/firebase_options.dart
-**/google-services.json
-**/GoogleService-Info.plist
+# **/google-services.json
+# **/GoogleService-Info.plist
 **/firebase_app_id_file.json

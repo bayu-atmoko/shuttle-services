@@ -12,7 +12,7 @@ class MapsPlacePickerPage extends StatefulWidget {
     required this.pageParams,
   });
 
-  final ExtraPlacePicker? pageParams;
+  final ExtraPlacePicker pageParams;
 
   @override
   State<MapsPlacePickerPage> createState() => _MapsPlacePickerPageState();
@@ -30,7 +30,7 @@ class _MapsPlacePickerPageState extends State<MapsPlacePickerPage>
         .isLoading;
 
     return MorphemeScrollViewWithAppBar(
-      tittle: "   Pilih lokasi penjemputan",
+      tittle: context.s.selectLocationPoint,
       isScroll: false,
       child: Stack(
         children: [

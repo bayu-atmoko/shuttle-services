@@ -19,7 +19,7 @@ extension GlobalCubitExtension on BuildContext {
 class GlobalCubit extends Cubit<GlobalState> {
   GlobalCubit()
       : super(GlobalState(
-          locale: const Locale('en'),
+          locale: const Locale('id'),
           theme: MorphemeThemeLight(),
         ));
 

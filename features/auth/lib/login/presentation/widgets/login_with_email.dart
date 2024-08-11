@@ -1,5 +1,5 @@
 import 'package:auth/login/presentation/cubit/login_cubit.dart';
-import 'package:auth/shared/helper/validator_value_helper.dart';
+import 'package:auth/login/presentation/widgets/remember_and_forgot_pin_section.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
@@ -18,50 +18,44 @@ class LoginWithEmail extends StatelessWidget {
 
     return Column(
       children: [
-        MorphemeTextField(
-          key: emailKey,
-          textfieldKey: const ValueKey(MorphemeDataTesId.inputEmail),
-          title: context.s.email,
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(hintText: context.s.yourEmail),
-          validator: ValidatorValueHelper.validatorEmail,
-          textInputAction: TextInputAction.next,
+        Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: MorphemeSizes.marginPage),
+          child: MorphemeTextField(
+            key: emailKey,
+            textfieldKey: const ValueKey(MorphemeDataTesId.inputEmail),
+            title: context.s.email,
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(hintText: context.s.yourEmail),
+            validator: ValidatorValueHelper.validatorEmail,
+            textInputAction: TextInputAction.next,
+          ),
         ),
         const MorphemeSpacing.vertical16(),
-        MorphemeTextField(
-          key: passwordKey,
-          textfieldKey: const ValueKey(MorphemeDataTesId.inputPassword),
-          isPassword: true,
-          title: context.s.password,
-          decoration: const InputDecoration(hintText: '******'),
-          validator: ValidatorValueHelper.validatorPassword,
+        Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: MorphemeSizes.marginPage),
+          child: MorphemeTextField(
+            key: passwordKey,
+            textfieldKey: const ValueKey(MorphemeDataTesId.inputPassword),
+            isPassword: true,
+            title: context.s.password,
+            decoration: InputDecoration(hintText: context.s.fillInPassword),
+            validator: ValidatorValueHelper.validatorPassword,
+          ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            MorphemeButton.text(
-              key: const ValueKey(MorphemeDataTesId.buttonAccountDemo),
-              isExpand: false,
-              text: context.s.accountDemo,
-              onPressed: () =>
-                  context.read<LoginCubit>().onAccountDemoPressed(context),
-            ),
-            MorphemeButton.text(
-              key: const ValueKey(MorphemeDataTesId.buttonForgotPassword),
-              isExpand: false,
-              text: '${context.s.forgotPassword}?',
-              onPressed: () =>
-                  context.read<LoginCubit>().onForgotPasswordPressed(context),
-            ),
-          ],
-        ),
+        const RememberAndForgotPinSection(),
         const MorphemeSpacing.vertical16(),
-        MorphemeButton.elevated(
-          key: const ValueKey(MorphemeDataTesId.buttonLoginWithEmail),
-          isLoading: watchLoginState is LoginLoading,
-          text: context.s.loginWithEmail,
-          onPressed: () =>
-              context.read<LoginCubit>().onLoginWithEmailPressed(context),
+        Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: MorphemeSizes.marginPage),
+          child: MorphemeButton.elevated(
+            key: const ValueKey(MorphemeDataTesId.buttonLoginWithEmail),
+            isLoading: watchLoginState is LoginLoading,
+            text: context.s.login,
+            onPressed: () =>
+                context.read<LoginCubit>().onLoginWithEmailPressed(context),
+          ),
         ),
       ],
     );

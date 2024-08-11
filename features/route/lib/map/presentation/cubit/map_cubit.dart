@@ -2,25 +2,45 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:core/core.dart';
+import 'package:home/home/data/models/body/list_report_body.dart';
+import 'package:home/home/domain/entities/list_report_entity.dart';
+import 'package:home/home/presentation/bloc/assigned_report/assigned_report_bloc.dart';
+import 'package:home/home/presentation/bloc/cleaned_report/cleaned_report_bloc.dart';
+import 'package:route/map/data/models/body/distance_matrix_body.dart';
 import 'package:route/map/data/models/body/map_routes_body.dart';
 import 'package:route/map/domain/entities/map_routes_entity.dart'
     as routes_entity;
+import 'package:route/map/presentation/bloc/distance_matrix/distance_matrix_bloc.dart';
 import 'package:route/map/presentation/bloc/map_routes/map_routes_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:route/map/presentation/pages/map_page.dart';
+import 'package:route/route_recommendation/data/models/body/create_route_body.dart';
+import 'package:route/route_recommendation/data/models/body/route_optimization_body.dart';
+import 'package:route/route_recommendation/domain/entities/route_optimization_entity.dart';
+import 'package:route/route_recommendation/presentation/bloc/create_route/create_route_bloc.dart';
+import 'package:route/route_recommendation/presentation/bloc/route_optimization/route_optimization_bloc.dart';
 
 part 'map_state.dart';
 
 class MapCubit extends MorphemeCubit<MapStateCubit> {
   MapCubit({
     required this.mapRoutesBloc,
+    required this.distanceMatrixBloc,
+    required this.routeOptimizationBloc,
+    required this.createRouteBloc,
+    required this.assignedReportBloc,
+    required this.cleanedReportBloc,
   }) : super(const MapStateCubit(
           polyLineCoordinates: [],
           zoom: MorphemeInt.mapsZoom,
         ));
 
   final MapRoutesBloc mapRoutesBloc;
+  final DistanceMatrixBloc distanceMatrixBloc;
+  final RouteOptimizationBloc routeOptimizationBloc;
+  final CreateRouteBloc createRouteBloc;
+  final AssignedReportBloc assignedReportBloc;
+  final CleanedReportBloc cleanedReportBloc;
 
   final Completer<GoogleMapController> controller = Completer();
   bool isInitialCamera = false;
@@ -28,54 +48,56 @@ class MapCubit extends MorphemeCubit<MapStateCubit> {
   final GlobalKey<State> _keyLoader = GlobalKey<State>();
 
   @override
-  void initState(BuildContext context) {
-    _getInitialCurrentLocation(context);
-  }
-
-  @override
-  void initArgument<Page>(BuildContext context, Page widget) async {
-    super.initArgument(context, widget);
-    if (widget is! MapPage) return;
-
-    final initialLocation = widget.pageParams?.locationLatLng;
-    if (initialLocation?.latitude != null &&
-        initialLocation?.longitude != null) {
-      final latLng = LatLng(
-        initialLocation!.latitude,
-        initialLocation.longitude,
-      );
-      emit(state.copyWith(
-        markerReportLatLng: [latLng],
-      ));
-    }
+  void initState(BuildContext context) async {
+    _getInitialCurrentLocation();
   }
 
   @override
   List<BlocProvider> blocProviders(BuildContext context) => [
         BlocProvider<MapRoutesBloc>(create: (context) => mapRoutesBloc),
+        BlocProvider<DistanceMatrixBloc>(
+            create: (context) => distanceMatrixBloc),
+        BlocProvider<RouteOptimizationBloc>(
+            create: (context) => routeOptimizationBloc),
+        BlocProvider<CreateRouteBloc>(create: (context) => createRouteBloc),
+        BlocProvider<AssignedReportBloc>(
+            create: (context) => assignedReportBloc),
+        BlocProvider<CleanedReportBloc>(create: (context) => cleanedReportBloc),
       ];
 
   @override
   List<BlocListener> blocListeners(BuildContext context) => [
         BlocListener<MapRoutesBloc, MapRoutesState>(
             listener: _listenerMapRoutes),
+        BlocListener<DistanceMatrixBloc, DistanceMatrixState>(
+            listener: _listenerDistanceMatrix),
+        BlocListener<RouteOptimizationBloc, RouteOptimizationState>(
+            listener: _listenerRouteOptimization),
+        BlocListener<CreateRouteBloc, CreateRouteState>(
+            listener: _listenerCreateRoute),
+        BlocListener<AssignedReportBloc, AssignedReportState>(
+            listener: _listenerListReportAssigned),
+        BlocListener<CleanedReportBloc, CleanedReportState>(
+            listener: _listenerListReportCleaned),
       ];
 
   @override
   void dispose() {
     mapRoutesBloc.close();
+    distanceMatrixBloc.close();
+    routeOptimizationBloc.close();
+    createRouteBloc.close();
+    assignedReportBloc.close();
+    cleanedReportBloc.close();
   }
 
   void _listenerMapRoutes(BuildContext context, MapRoutesState state) {
     state.when(
-      onLoading: (_) =>
-          MorphemeCircularLoadingDialog.showLoadingDialog(context, _keyLoader),
       onFailed: (state) {
         Navigator.of(context, rootNavigator: true).pop();
         _showTechnicalErrorMessage(context);
       },
       onSuccess: (state) {
-        Navigator.of(context, rootNavigator: true).pop();
         List<routes_entity.LegsMapRoutes>? legs =
             (state.data.routes ?? []).isNotEmpty
                 ? state.data.routes!.first.legs
@@ -106,8 +128,109 @@ class MapCubit extends MorphemeCubit<MapStateCubit> {
       MorphemeSnackBar.error(
         key: const ValueKey('snackbarError'),
         context: context,
-        message: "Ada kesalahan teknis",
+        message: context.s.thereAreTechError,
       ),
+    );
+  }
+
+  void _listenerDistanceMatrix(
+    BuildContext context,
+    DistanceMatrixState state,
+  ) {
+    state.when(
+      onFailed: (state) {
+        Navigator.of(context, rootNavigator: true).pop();
+        _showTechnicalErrorMessage(context);
+      },
+      onSuccess: (state) {
+        final distanceMatrixReportId =
+            state.body.origins.map((e) => e.reportId).toList();
+
+        final distanceMatrixRows = state.data.rows;
+        List<RowsRouteOptimization> routeOptimizationRows = [];
+
+        distanceMatrixRows?.forEachIndexed((indexRow, element) {
+          List<ElementsRouteOptimization> routeOptimizationElements = [];
+
+          element.elements?.forEachIndexed((indexColumn, item) {
+            routeOptimizationElements.add(ElementsRouteOptimization(
+              originReportId: distanceMatrixReportId[indexRow],
+              destinationReportId: distanceMatrixReportId[indexColumn],
+              duration: item.duration?.value ?? 0,
+              distance: item.distance?.value ?? 0,
+            ));
+          });
+
+          routeOptimizationRows.add(RowsRouteOptimization(
+            elements: routeOptimizationElements,
+          ));
+        });
+
+        _fetchRouteOptimization(RouteOptimizationBody(
+          rows: routeOptimizationRows,
+        ));
+      },
+    );
+  }
+
+  void _listenerRouteOptimization(
+    BuildContext context,
+    RouteOptimizationState state,
+  ) {
+    state.when(
+      onFailed: (state) {
+        Navigator.of(context, rootNavigator: true).pop();
+        _showTechnicalErrorMessage(context);
+      },
+      onSuccess: (state) {
+        List<LatLng> optimizeLatLng = _getMapRoutesFromReport(
+          this.state.reportCleaned ?? [],
+          this.state.reportAssigned ?? [],
+          state.data.data ?? [],
+        );
+
+        _getRouteAndSaveMarker(optimizeLatLng);
+
+        /// ------------------------------------------------------------------------
+        /// Create a route in database
+
+        if ((state.data.data ?? []).isNotEmpty) {
+          final destinationReportId = state.data.data?.last.destinationReportId;
+
+          final List<RowsRouteOptimization> routeOptimizeBody =
+              state.body.rows ?? [];
+          final List<ElementsRouteOptimization> routeOptimizeRow1Body =
+              routeOptimizeBody.isNotEmpty
+                  ? (routeOptimizeBody.first.elements ?? [])
+                  : [];
+          int? totalDistance;
+          int? totalDuration;
+
+          if (routeOptimizeRow1Body.isNotEmpty && destinationReportId != null) {
+            final ElementsRouteOptimization? routeOptimizeColumn =
+                routeOptimizeRow1Body.firstWhereOrNull((element) =>
+                    element.destinationReportId == destinationReportId);
+            totalDistance = routeOptimizeColumn?.distance;
+            totalDuration = routeOptimizeColumn?.duration;
+          }
+
+          if (totalDistance != null && totalDuration != null) {
+            _fetchCreateRoute(CreateRouteBody(
+              totalDistance: totalDistance,
+              totalDuration: totalDuration,
+              route: state.data.data,
+            ));
+
+            /// close the loading dialog
+          } else {
+            Navigator.of(context, rootNavigator: true).pop();
+          }
+
+          /// close the loading dialog
+        } else {
+          Navigator.of(context, rootNavigator: true).pop();
+        }
+      },
     );
   }
 
@@ -150,6 +273,19 @@ class MapCubit extends MorphemeCubit<MapStateCubit> {
             ),
           ),
         );
+
+        /// intermediates location
+      } else {
+        intermediates.add(
+          OriginMapRoutes(
+            location: LocationMapRoutes(
+              latLng: LatLngMapRoutes(
+                latitude: optimizeLatLng[i].latitude,
+                longitude: optimizeLatLng[i].longitude,
+              ),
+            ),
+          ),
+        );
       }
     }
 
@@ -168,10 +304,44 @@ class MapCubit extends MorphemeCubit<MapStateCubit> {
     ));
   }
 
+  void _listenerCreateRoute(
+    BuildContext context,
+    CreateRouteState state,
+  ) {
+    state.when(
+      onFailed: (state) {
+        Navigator.of(context, rootNavigator: true).pop();
+        _showTechnicalErrorMessage(context);
+      },
+      onSuccess: (state) {
+        Navigator.of(context, rootNavigator: true).pop();
+
+        final List<AlphaDataListReport> report = [
+          ...(this.state.reportCleaned ?? []),
+          ...(this.state.reportAssigned ?? []),
+        ];
+        final existingRouteId = report.isNotEmpty ? report.first.routeId : null;
+
+        emit(this.state.copyWith(
+              routeId: state.data.data?.routeId ?? existingRouteId,
+            ));
+      },
+    );
+  }
+
   void _fetchMapRoutes(MapRoutesBody body) =>
       mapRoutesBloc.add(FetchMapRoutes(body));
 
-  void _getInitialCurrentLocation(BuildContext context) async {
+  void _fetchDistanceMatrix(DistanceMatrixBody body) =>
+      distanceMatrixBloc.add(FetchDistanceMatrix(body));
+
+  void _fetchRouteOptimization(RouteOptimizationBody body) =>
+      routeOptimizationBloc.add(FetchRouteOptimization(body));
+
+  void _fetchCreateRoute(CreateRouteBody body) =>
+      createRouteBloc.add(FetchCreateRoute(body));
+
+  void _getInitialCurrentLocation() async {
     Location location = _getLatLngCurrentLocation();
 
     GoogleMapController googleMapController = await controller.future;
@@ -187,8 +357,6 @@ class MapCubit extends MorphemeCubit<MapStateCubit> {
         }
       },
     );
-
-    _fetchMultipleRoute(context);
   }
 
   void _moveMapCamera(
@@ -260,6 +428,11 @@ class MapCubit extends MorphemeCubit<MapStateCubit> {
         emit(state.copyWith(
           currentLocation: location,
         ));
+
+        /// get report list
+        fetchAssignedReport(ListReportBody(
+          status: ReportStatusEnum.assigned.value,
+        ));
       },
     );
     return location;
@@ -297,14 +470,244 @@ class MapCubit extends MorphemeCubit<MapStateCubit> {
     ));
   }
 
+  void fetchAssignedReport(ListReportBody body) {
+    assignedReportBloc.add(FetchAssignedReport(body));
+  }
+
+  void _listenerListReportAssigned(
+      BuildContext context, AssignedReportState state) {
+    state.when(
+      onLoading: (_) =>
+          MorphemeCircularLoadingDialog.showLoadingDialog(context, _keyLoader),
+      onFailed: (state) {
+        Navigator.of(context, rootNavigator: true).pop();
+        context.showSnackBar(
+          MorphemeSnackBar.error(
+            key: const ValueKey('snackbarError'),
+            context: context,
+            message: context.s.thereAreTechError,
+          ),
+        );
+      },
+      onSuccess: (state) {
+        emit(this.state.copyWith(
+              reportAssigned: state.data.data?.data,
+            ));
+        _fetchCleanedReport(ListReportBody(
+          status: ReportStatusEnum.cleaned.value,
+        ));
+      },
+    );
+  }
+
+  void _fetchCleanedReport(ListReportBody body) {
+    cleanedReportBloc.add(FetchCleanedReport(body));
+  }
+
+  void _listenerListReportCleaned(
+      BuildContext context, CleanedReportState state) {
+    state.when(
+      onFailed: (state) => context.showSnackBar(
+        MorphemeSnackBar.error(
+          key: const ValueKey('snackbarError'),
+          context: context,
+          message: context.s.thereAreTechError,
+        ),
+      ),
+      onSuccess: (state) {
+        emit(this.state.copyWith(
+              reportCleaned: state.data.data?.data,
+            ));
+
+        _fetchMultipleRoute(context);
+      },
+    );
+  }
+
   void _fetchMultipleRoute(
     BuildContext context,
   ) {
-    final List<LatLng>? markerReportLatLng = state.markerReportLatLng;
+    // TODO task maksimal per petugas yaitu 10
 
-    if (markerReportLatLng != null) {
+    List<DistanceMatrixModel?> cleanedDistanceMatrix =
+        _getDistanceMatrixFromReport(state.reportCleaned ?? []);
+    List<DistanceMatrixModel?> assignedDistanceMatrix =
+        _getDistanceMatrixFromReport(state.reportAssigned ?? []);
+
+    List<DistanceMatrixModel> reportDistanceMatrix = [];
+    for (var element in cleanedDistanceMatrix) {
+      if (element != null) {
+        reportDistanceMatrix.add(element);
+      }
+    }
+    for (var element in assignedDistanceMatrix) {
+      if (element != null) {
+        reportDistanceMatrix.add(element);
+      }
+    }
+
+    /// officer only have task with maximal 10
+    List<DistanceMatrixModel> finalDistanceMatrixData =
+        reportDistanceMatrix.take(10).toList();
+
+    /// ------------------------------------------------------------------------
+
+    /// Current location
+    Map<String, double>? myLocation;
+    if (state.currentLocation?.latitude != null &&
+        state.currentLocation?.longitude != null) {
+      myLocation = {
+        'lat': state.currentLocation!.latitude!,
+        'lng': state.currentLocation!.longitude!,
+      };
+    }
+
+    List<Map<String, double>> locations = finalDistanceMatrixData
+        .map((e) => {
+              'lat': e.latLng.latitude,
+              'lng': e.latLng.longitude,
+            })
+        .toList();
+
+    Map<String, double>? nearestLocation;
+    double shortestDistance = double.infinity;
+
+    if (myLocation != null) {
+      // Loop through all locations to find the nearest one
+      for (var location in locations) {
+        double distance = haversine(
+          myLocation['lat']!,
+          myLocation['lng']!,
+          location['lat']!,
+          location['lng']!,
+        );
+        if (distance < shortestDistance) {
+          shortestDistance = distance;
+          nearestLocation = location;
+        }
+      }
+    }
+
+    if (nearestLocation != null) {
+      List<DistanceMatrixModel> nearestDistanceMatrixData =
+          finalDistanceMatrixData
+              .where((element) =>
+                  element.latLng.latitude == nearestLocation!['lat'] &&
+                  element.latLng.longitude == nearestLocation['lng'])
+              .toList();
+      nearestDistanceMatrixData.addAll(
+        finalDistanceMatrixData.whereNot((element) =>
+            element.latLng.latitude == nearestLocation!['lat'] &&
+            element.latLng.longitude == nearestLocation['lng']),
+      );
+
+      _getDistanceMatrixOrRoute(context, nearestDistanceMatrixData);
+
+      ///
+    } else {
+      _getDistanceMatrixOrRoute(context, finalDistanceMatrixData);
+    }
+  }
+
+  void _getDistanceMatrixOrRoute(
+    BuildContext context,
+    List<DistanceMatrixModel> finalDistanceMatrixData,
+  ) {
+    /// show route for many report locations
+    if (finalDistanceMatrixData.length > 1) {
+      _fetchDistanceMatrix(DistanceMatrixBody(
+        origins: finalDistanceMatrixData,
+        destinations: finalDistanceMatrixData,
+      ));
+
+      /// show route from your location to the report location
+    } else if (finalDistanceMatrixData.length == 1) {
       _getRouteAndSaveMarker(
-        markerReportLatLng,
+        finalDistanceMatrixData.map((e) => e.latLng).toList(),
+      );
+      Navigator.of(context, rootNavigator: true).pop();
+    } else {
+      Navigator.of(context, rootNavigator: true).pop();
+    }
+  }
+
+  List<DistanceMatrixModel?> _getDistanceMatrixFromReport(
+      List<AlphaDataListReport> data) {
+    return data
+        .map(
+          (e) {
+            try {
+              return e.locationLatitude != null &&
+                      e.locationLongitude != null &&
+                      e.reportId != null
+                  ? DistanceMatrixModel(
+                      reportId: e.reportId!,
+                      latLng: LatLng(
+                        e.locationLatitude!.toDouble(),
+                        e.locationLongitude!.toDouble(),
+                      ),
+                    )
+                  : null;
+            } catch (_) {
+              return null;
+            }
+          },
+        )
+        .skipWhile((e) => e == null)
+        .toList();
+  }
+
+  List<LatLng> _getMapRoutesFromReport(
+    List<AlphaDataListReport> reportCleaned,
+    List<AlphaDataListReport> reportAssigned,
+    List<DataRouteOptimization> optimizeList,
+  ) {
+    List<LatLng> result = [];
+
+    List<AlphaDataListReport> report = [
+      ...reportCleaned,
+      ...reportAssigned,
+    ];
+
+    optimizeList.forEachIndexed((index, item) {
+      for (var element in report) {
+        if (index == 0) {
+          _insertOptimizeLatLng(
+            item.originReportId,
+            element,
+            result,
+          );
+        }
+      }
+    });
+
+    optimizeList.forEachIndexed((index, item) {
+      for (var element in report) {
+        _insertOptimizeLatLng(
+          item.destinationReportId,
+          element,
+          result,
+        );
+      }
+    });
+
+    return result;
+  }
+
+  void _insertOptimizeLatLng(
+    int? destinationReportId,
+    AlphaDataListReport element,
+    List<LatLng> result,
+  ) {
+    if (destinationReportId != null &&
+        destinationReportId == element.reportId &&
+        element.locationLatitude != null &&
+        element.locationLongitude != null) {
+      result.add(
+        LatLng(
+          element.locationLatitude!.toDouble(),
+          element.locationLongitude!.toDouble(),
+        ),
       );
     }
   }
